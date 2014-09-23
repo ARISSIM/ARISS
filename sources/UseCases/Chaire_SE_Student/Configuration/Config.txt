@@ -1,0 +1,13 @@
+% Test file process config
+%partition name
+%path process
+%time processing (in usec !!!)
+%number of sampling ports
+%number of queuing ports
+%ports number 
+% Il ne doit pas y avoir d espace en plus !!
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+Master ./Master/Master.out 250000
+Slave ./Slave/Slave.out 250000
+Leica ./Leica/Leica.out 250000
+Scao ./Scao/Scao.out 250000

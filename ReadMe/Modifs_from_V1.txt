@@ -1,0 +1,118 @@
+----------------------------
+-- Improvement of the GUI --
+----------------------------
+#Addition of auto-scrolling function in partition windows : file sources/GUI/gui.py - L 163 :
+
+#Change of the color of the window in function of the partition : file sources/GUI/gui.py - L 101-109 :
+				
+#Addition of the partition name in the windows' title : files sources/GUI/gui.py (L69) and sources/common/CBasefunction.cpp (L 92)
+
+----------------------------------------------
+-- Removal of the warnings in the simulator --
+----------------------------------------------
+#File sources/common/Cpartition.cpp":
+	*Addition of missing return in functions	
+
+#File sources/common/communication_obj.cpp:
+	*Addition of a space between the type of the function and its name
+
+#File sources/common/CArgument.cpp:
+	*Deletion of the commented "cout"
+	*Deletion of the empty or undeclared functions in the associated header file
+
+#File sources/common/CSampling.Cpp 
+	*Addition of the return value (after "while")
+	*Deletion of the commented "cout"
+	*Changing type of variable to "unsigned int"
+
+#File sources/common/CQueuing.cpp:
+	*Deletion of useless comments
+	*Changing type of variable to "unsigned int"
+
+#File sources/common/CBasefunction.cpp:
+	*Addition or modification of return values in functions
+		->create_pipe (L 27)
+		->open_pipe (L66)
+		->read_in_pipe (L73)
+	*function GUI_ARINC_partition:
+		->Changing type of the argument "name_partition" to string
+		->Deletion of the unused argument "int num_partition"
+		
+	*function GUI_ARINC_emulator :
+		->Creation of "const char*" variables (because these strings are not modified)		
+	*function init_communcation :
+		*Renamed to "init_communication" (missing "i")
+		
+#File sources/simulateur/CConfig.cpp:  
+	*Removal of the unused variable "int i" (l 29)
+	*Moving the creation of variables to the beginning of functions
+	*function readcommunication:
+		->Removal of the redundant variable "port2"
+		->Replacement of the "if" line 96 by "else if"
+	*function vwords:
+		->Changing type of counter variable "int i" to "unsigned int" in for loop (line 139)
+
+#File sources/simulateur/main.cpp:
+	*Addition of a type to main function
+
+#File sources/simulateur/CManager.cpp:
+	*function create_part:
+		->Addition of parameters for the creation of sampling sockets (lines 126 and143)
+		->Moving the creation of variables closer to the beginning of the function
+		->Clean emptying of vectors
+	*function init_process:
+		->Declaration of vectors at the beginning of the function
+		->Clean emptying of the vectors (use of clear then swap in order to reduce the vector size)
+
+
+--------------------------------------------------------------
+-- Assuring compatibility with Raspberry PI's ARM processor --
+--------------------------------------------------------------
+#File sources/common/CQueuing.cpp:
+	*Deletion of useless includes:
+		->sys/un.h
+		->sys/shm.h
+		->sys/ipc.h
+		->sys/select.h
+		->unistd.h
+	*WARNING: the line 63 "lc_a = sizeof(c_a);" is crucial.
+	*Force host to follow IP configuration (little and big endian) of the network by using the following functions:
+		->htonl (L118)
+		->htons (L119)
+
+#File sources/common/CSampling.cpp:
+	*Deletion of useless includes:
+		->sys/un.h
+		->sys/shm.h
+		->sys/ipc.h
+		->sys/select.h
+		->unistd.h
+	*WARNING: the line 61 "lc_a = sizeof(c_a);" is crucial.
+	*Force host to follow IP configuration (little and big endian) of the network by using the following functions:
+		->htonl (L120)
+		->htons (L121)
+		
+
+#File sources/simulateur/Cport_service.cpp:
+	*Deletion of useless includes:
+		->sys/un.h
+		->unistd.h
+	*Force host to follow IP configuration (little and big endian) of the network by using the following functions:
+		->htonl (L33)
+		->htons (L38)
+		->htonl (L72)
+		->htons (L76)
+		
+-----------------------------------------------------------------------
+-- Creation of the simulator of an earth observation satellite AGILE --
+-----------------------------------------------------------------------
+All files are located in sources/Chaire_SE_Student
+
+Based on the BEI subject given to third year N7 GEA students (2013-2014), this solution implements some actions of this satellite including :
+	*Read a flight plan
+	*Orientate satellite (simulated by 2 servo motors linked to Raspberry PI)
+	*Capture photos (using the camera connected to Raspberry PI)
+	*Transfer photos
+	*Tolerate system faults
+In this version 4 partitions are used : Master, Slave (both related to fault tolerance), SCAO (aka AOCS in English, managing motors) and Camera (dealing with the capturing actions).
+More information in the documents associated with this BEI and the 2014 "Projet Long".

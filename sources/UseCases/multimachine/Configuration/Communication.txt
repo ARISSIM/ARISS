@@ -1,0 +1,10 @@
+% Communication Table
+% colonnes (i) :
+% C(1) partition qui ecrit
+% C(2) partition qui reçoit
+% C(3) sampling ou queuing
+% C(4) numero du port dans lequel ecrire
+2 1 Q 10000
+1 2 Q 10001
+4 3 S 10002
+3 4 S 10003

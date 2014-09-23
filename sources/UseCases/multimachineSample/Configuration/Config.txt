@@ -1,0 +1,11 @@
+% Test file process config
+%partition name
+%path process
+%time processing
+%number of sampling ports
+%number of queuing ports
+%ports number 
+% Il ne doit pas y avoir d espace en plus !!
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+P1 ./f1/f1.out 300000
+P2 ./f2/f2.out 800000
