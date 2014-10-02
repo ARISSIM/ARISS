@@ -21,7 +21,7 @@ all: targets
 build/%.o: sources/%.cpp
 	@echo "  [CC]    $< -> $@"
 	@mkdir -p $(dir $@)
-	@$(CC) $(CC_FLAGS_ALL) $(CC_FLAGS_SPEC) -o $@ -c $< -I/home/ics/ARINC_653_NB/ARINC653-simulator/sources/libApexArinc653/include
+	@$(CC) $(CC_FLAGS_ALL) $(CC_FLAGS_SPEC) -o $@ -c $< -I$(shell pwd)/sources/libApexArinc653/include
 
 %.sym :
 	for path in $^ ; do \
@@ -65,9 +65,9 @@ link :
 
 	
 lib:
-	gcc -c -fPIC -Wall -o ./sources/libApexArinc653/dist/CQueuing.o ./sources/libApexArinc653/src/CQueuing.c -I$(INCLUDE_DIR)
-	gcc -c -fPIC -Wall -o ./sources/libApexArinc653/dist/CSampling.o ./sources/libApexArinc653/src/CSampling.c -I$(INCLUDE_DIR)
-	gcc -c -fPIC -Wall -o ./sources/libApexArinc653/dist/CBasefunction.o ./sources/libApexArinc653/src/CBasefunction.c -I$(INCLUDE_DIR)
-	gcc -c -fPIC -Wall -o ./sources/libApexArinc653/dist/Vector.o ./sources/libApexArinc653/src/Vector.c -I$(INCLUDE_DIR)
-	gcc -fPIC -shared -o -Wl,-soname,libApexArinc653.so ./sources/libApexArinc653/dist/libApexArinc653.so ./sources/libApexArinc653/dist/CQueuing.o ./sources/libApexArinc653/dist/CSampling.o ./sources/libApexArinc653/dist/CBasefunction.o ./sources/libApexArinc653/dist/Vector.o
+	gcc -c -fPIC -Wall -o $(shell pwd)/sources/libApexArinc653/dist/CQueuing.o $(shell pwd)/sources/libApexArinc653/src/CQueuing.c -I$(INCLUDE_DIR)
+	gcc -c -fPIC -Wall -o $(shell pwd)/sources/libApexArinc653/dist/CSampling.o $(shell pwd)/sources/libApexArinc653/src/CSampling.c -I$(INCLUDE_DIR)
+	gcc -c -fPIC -Wall -o $(shell pwd)/sources/libApexArinc653/dist/CBasefunction.o $(shell pwd)/sources/libApexArinc653/src/CBasefunction.c -I$(INCLUDE_DIR)
+	gcc -c -fPIC -Wall -o $(shell pwd)/sources/libApexArinc653/dist/Vector.o $(shell pwd)/sources/libApexArinc653/src/Vector.c -I$(INCLUDE_DIR)
+	gcc -fPIC -shared -o -Wl,-soname,libApexArinc653.so $(shell pwd)/sources/libApexArinc653/dist/libApexArinc653.so $(shell pwd)/sources/libApexArinc653/dist/CQueuing.o $(shell pwd)/sources/libApexArinc653/dist/CSampling.o $(shell pwd)/sources/libApexArinc653/dist/CBasefunction.o $(shell pwd)/sources/libApexArinc653/dist/Vector.o
 	#gcc -L. -lmy main.o -o prog
