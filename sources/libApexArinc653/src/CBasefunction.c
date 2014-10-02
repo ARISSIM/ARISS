@@ -74,6 +74,7 @@ static int read_in_pipe(char* input_chain) {
 */
 
 int GUI_ARINC_partition(char* name_partition, int position, int redemarrage) {
+    printf("TOTOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\n");
     char name_machine[40];
     gethostname(name_machine, sizeof (name_machine));
     // Cleaning and creation of the "memory" folders (stable_memory and camera_memory)

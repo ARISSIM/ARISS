@@ -6,8 +6,8 @@ d		:= $(dir)
 dir	:= $(d)/simulator
 include	$(dir)/rules.mk
 
-#dir    := $(d)/UseCases
-#include        $(dir)/rules.mk
+dir    := $(d)/UseCases
+include        $(dir)/rules.mk
 
 
 d		:= $(dirstack_$(sp))
