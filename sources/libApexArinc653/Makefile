@@ -1,4 +1,4 @@
-CC		:= gcc
+CC		:= g++
 
 CFLAGS= -fPIC -Wall #-fPIC -W -Wall -ansi -pedantic
 LDFLAGS=

@@ -32,6 +32,7 @@ build/%.o: sources/%.cpp
 binary/%.out:
 	@echo "  [CC]    $< -> $@"
 	@mkdir -p $(dir $@)
+	@echo -I$(shell pwd)/sources/libApexArinc653/include  -o $@ $^ $(LIBS)
 	@$(CC) -I$(shell pwd)/sources/libApexArinc653/include  -o $@ $^ $(LIBS)
 
 # Overriden in rules.mk
