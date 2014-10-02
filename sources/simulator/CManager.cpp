@@ -1,4 +1,4 @@
-#include "include/CManager.h"
+#include "CManager.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/wait.h>

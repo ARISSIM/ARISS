@@ -33,6 +33,9 @@ include	$(dir)/rules.mk
 dir	:= $(d)/Sampling
 include	$(dir)/rules.mk
 
+dir	:= $(d)/Test_JNI
+include	$(dir)/rules.mk
+
 #To add a new use case, duplicate the Template directory
 #dir	:= $(d)/Template
 #include	$(dir)/rules.mk

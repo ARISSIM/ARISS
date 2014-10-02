@@ -9,11 +9,11 @@ int main(int argc, char *argv[]) {
     //////////////////////////////////
     //	PROGRAMME PRINCIPAL	//
     //////////////////////////////////
-    std::cout << "------------ F1 -------------" << argv[0] << std::endl;
+  /*  std::cout << "------------ F1 -------------" << argv[0] << std::endl;
     system("pwd");
     //std::cout<<"avant Quatre saison"<< std::endl ;	
     system("java QuatreBoutonsInterfaceNoyau");
     //std::cout<<"après Quatre saison"<< std::endl ;
-    system("java Dcpt");
+    system("java Dcpt");*/
 }
 

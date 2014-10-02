@@ -1,5 +1,5 @@
-#include "include/CManager.h"
-#include "include/CBasefunction.h"
+#include "CManager.h"
+#include "CBasefunction.h"
 
 int main (int ac, char **av)
 	{

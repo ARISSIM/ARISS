@@ -1,4 +1,4 @@
-#include "include/CPartition.h"
+#include "CPartition.h"
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
