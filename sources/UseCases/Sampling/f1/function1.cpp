@@ -1,6 +1,10 @@
-#include "include/CBasefunction.h"
+#include "CBasefunction.h"
+#include <iostream>
 
 int main(int argc, char *argv[]) {
+    
+    printf("dasn f11 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
     int redemarrage = atoi(argv[7]);
     int position = atoi(argv[6]);
     GUI_ARINC_partition("Partition1", position, redemarrage);
@@ -13,23 +17,35 @@ int main(int argc, char *argv[]) {
     COMMUNICATION_VECTOR myCvector;
     myCvector = init_communication(nbarg, argument, NULL);
 
+    int samp_port;
+    vector_get(&(myCvector.vsamp_port), 0, &samp_port);
 
+    int samp_socket;
+    vector_get(&(myCvector.vsamp_socket), 0, &samp_socket);
+
+    Type_Message *rMessage;
 
     char result[256];
-    CSampling Sservice; //OBJET QUI PERMET DE COMMUNIQUER PAR SAMPLING
     i = 0;
     int ret = 0;
     for (;;) {
 
         sprintf(result, "message envoye depuis f1 numero %d", i);
         std::cout << "TEXTE A EMETTRE: " << result << std::endl;
-        Sservice.WRITE_SAMPLING_MESSAGE(argv[0], myCvector.vsamp_port[0], myCvector.vsamp_socket[0], myCvector.emetteur, result);
+        WRITE_SAMPLING_MESSAGE(argv[0], samp_port, samp_socket, myCvector.emetteur, result);
 
-        ret = Sservice.READ_SAMPLING_MESSAGE(myCvector.vsamp_socket[0]);
-        std::cout << "ret" << ret << std::endl;
-        Sservice.Display_Message();
+        ret = READ_SAMPLING_MESSAGE(samp_socket, rMessage);
+        
+        std::cout << "			" << std::endl;
+        std::cout << "message from : " << rMessage->m_sender << " length : " << rMessage->m_length << std::endl;
+        std::cout << "receive :" << rMessage->m_message << std::endl;
+        std::cout << "			" << std::endl;        std::cout << "ret" << ret << std::endl;
+        
         i++;
         sleep(1);
     }
 
 }
+
+
+

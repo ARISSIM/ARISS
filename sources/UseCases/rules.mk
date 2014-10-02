@@ -30,8 +30,8 @@ d		:= $(dir)
 dir	:= $(d)/Queueing
 include	$(dir)/rules.mk
 
-#dir	:= $(d)/Sampling
-#include	$(dir)/rules.mk
+dir	:= $(d)/Sampling
+include	$(dir)/rules.mk
 
 #dir	:= $(d)/Test_JNI
 #include	$(dir)/rules.mk
