@@ -1,3 +1,10 @@
+/Makefile~
+/sources/libApexArinc653/build/ApexArinc653Jni.o
+/sources/libApexArinc653/build/CArgument.o
+/sources/libApexArinc653/build/CBasefunction.o
+/sources/libApexArinc653/build/CQueuing.o
+/sources/libApexArinc653/build/CSampling.o
+/sources/libApexArinc653/build/Vector.o
 /build/
 /binary/
 /scriptLicence.sh

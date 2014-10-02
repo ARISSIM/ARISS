@@ -16,7 +16,7 @@ define SRC_2_SYM
     $(foreach src,$(1),$(patsubst sources/%.sym,binary/%,$(src)))
 endef
 
-all: targets
+all: lib targets 
 
 build/%.o: sources/%.cpp
 	@echo "  [CC]    $< -> $@"
@@ -51,6 +51,7 @@ mrproper :
 	@rm -f $(TARGETS) $(OBJECTS)
 	@find -name *~ | xargs rm -f
 	@find -name "*.fifo" | xargs rm -f
+	@(cd $(shell pwd)/sources/libApexArinc653/ && $(MAKE) $@)
 
 symlinks: $(SYMLINKS)
 	@echo symlinks created
@@ -65,9 +66,4 @@ link :
 
 	
 lib:
-	@gcc -c -fPIC -Wall -o $(shell pwd)/sources/libApexArinc653/dist/CQueuing.o $(shell pwd)/sources/libApexArinc653/src/CQueuing.c -I$(INCLUDE_DIR)
-	@gcc -c -fPIC -Wall -o $(shell pwd)/sources/libApexArinc653/dist/CSampling.o $(shell pwd)/sources/libApexArinc653/src/CSampling.c -I$(INCLUDE_DIR)
-	@gcc -c -fPIC -Wall -o $(shell pwd)/sources/libApexArinc653/dist/CBasefunction.o $(shell pwd)/sources/libApexArinc653/src/CBasefunction.c -I$(INCLUDE_DIR)
-	@gcc -c -fPIC -Wall -o $(shell pwd)/sources/libApexArinc653/dist/Vector.o $(shell pwd)/sources/libApexArinc653/src/Vector.c -I$(INCLUDE_DIR)
-	@gcc -fPIC -shared -o -Wl,-soname,libApexArinc653.so $(shell pwd)/sources/libApexArinc653/dist/libApexArinc653.so $(shell pwd)/sources/libApexArinc653/dist/CQueuing.o $(shell pwd)/sources/libApexArinc653/dist/CSampling.o $(shell pwd)/sources/libApexArinc653/dist/CBasefunction.o $(shell pwd)/sources/libApexArinc653/dist/Vector.o
-	#gcc -L. -lmy main.o -o prog
+	@(cd $(shell pwd)/sources/libApexArinc653/ && $(MAKE))
