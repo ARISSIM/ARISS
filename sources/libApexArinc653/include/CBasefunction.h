@@ -40,9 +40,9 @@ void GUI_ARINC_partition_kill(int pid_to_kill);
 
 COMMUNICATION_VECTOR init_communication(int nbarg, char* argument[], char** mode);
 
-static int open_pipe(const char* Output_pipe, const char* Input_pipe, const char* name_partition);
-static int create_pipe(const char* Output_pipe, const char* Input_pipe);
-static int read_in_pipe(char* input_chain);
+//static int open_pipe(const char* Output_pipe, const char* Input_pipe, const char* name_partition);
+//static int create_pipe(const char* Output_pipe, const char* Input_pipe);
+//static int read_in_pipe(char* input_chain);
 
 
 

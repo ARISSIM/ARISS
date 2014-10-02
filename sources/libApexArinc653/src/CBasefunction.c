@@ -64,12 +64,14 @@ static int open_pipe(const char* Output_pipe, const char* Input_pipe, const char
 
 }
 
+/*
 static int read_in_pipe(char* input_chain) {
     input_chain = '\0';
 
     return (read(STDIN_FILENO, input_chain, 256));
 
 }
+*/
 
 int GUI_ARINC_partition(char* name_partition, int position, int redemarrage) {
     char name_machine[40];
