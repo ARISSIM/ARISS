@@ -179,6 +179,12 @@ COMMUNICATION_VECTOR init_communication(int nbarg, char* argument[], char** mode
     if (mode != NULL) {
         *mode = argument[5];
     }
+
+    vector_init(&(Cvector.vsamp_socket),sizeof(int),10);
+    vector_init(&(Cvector.vqueuing_socket),sizeof(int),10);
+    vector_init(&(Cvector.vsamp_port),sizeof(int),10);
+    vector_init(&(Cvector.vqueuing_port),sizeof(int),10);
+
     Cvector.vsamp_socket = split_arg(arg_samp_sock);
     Cvector.vqueuing_socket = split_arg(arg_Qsock);
     Cvector.vsamp_port = split_arg(arg_Sport);

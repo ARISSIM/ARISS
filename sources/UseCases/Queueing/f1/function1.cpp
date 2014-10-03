@@ -6,6 +6,7 @@ int main(int argc, char *argv[]) {
     int redemarrage = atoi(argv[7]);
     int position = atoi(argv[6]);
     GUI_ARINC_partition("Partition1", position, redemarrage);
+    std::cout << "GUI OK" << std::endl;
     Type_Message rMessage;
     int nbarg = argc;
     char **argument = new char*[argc];
@@ -13,9 +14,10 @@ int main(int argc, char *argv[]) {
     for (i = 0; i <= nbarg; i++) {
         argument[i] = argv[i];
     }
+    std::cout << "INIT TO START FROM F1 " << argument[0] << " " << argument[1]<< " " <<argument[2]<< " " << argument[3]<< " " << argument[4] << std::endl;
     COMMUNICATION_VECTOR myCvector;
     myCvector = init_communication(nbarg, argument, NULL);
-
+    std::cout << "INIT COM DONE" << std::endl;
     //////////////////////
     //INIT comm Queuing //
     //////////////////////
@@ -55,5 +57,6 @@ int portID;
             std::cout << "			" << std::endl;
         }
     }
+        return 0;
 }
 

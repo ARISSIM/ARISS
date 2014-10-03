@@ -358,39 +358,39 @@ void CManager::create_part() {
 
                 }
                 std::cout<<"L'arret du Master a ete detecte... redemarrage..."<<std::endl;
-			
-                if((pid=fork())==0)
-                        {
-                        //child
-				
-                        std::cout<<"IM the child and my PID is "<<(int) getpid()<<std::endl;
-                        std::cout<<"partition "<<g<<std::endl;
-                        std::cout<<"path to binary "<<partitionTable[g]<<std::endl;	
-                        sleep(1);
-                        char interm[3];
-                        sprintf(interm,"%d",g);
-                        const char* argument5=interm;
-                        const char* argument6[2]={"1"};
-                        if(g==0){
-                                if(arg_id_partition_master.compare("p")){
-                                        arg_id_partition_master="b";
-                                        arg_id_partition=arg_id_partition_master;			
-                                }
-                                }
-                        else if(g==1){	
-                                if(arg_id_partition_slave.compare("p")){
-                                        arg_id_partition_slave="b";
-                                        arg_id_partition=arg_id_partition_slave;			
-                                }
-
-                                }		
-                        ret=execlp(partitionTable[g],arg,(arg1[g]).c_str(),(arg2[g]).c_str(),(arg3[g]).c_str(),(arg4[g]).c_str(),arg_id_partition.c_str(),argument5,argument6,NULL);
-					
-                        if (ret==-1)
-                        perror(" exec ");			
-                        exit(0);
-				
-                        }
+//			
+//                if((pid=fork())==0)
+//                        {
+//                        //child
+//				
+//                        std::cout<<"IM the child and my PID is "<<(int) getpid()<<std::endl;
+//                        std::cout<<"partition "<<g<<std::endl;
+//                        std::cout<<"path to binary "<<partitionTable[g]<<std::endl;	
+//                        sleep(1);
+//                        char interm[3];
+//                        sprintf(interm,"%d",g);
+//                        const char* argument5=interm;
+//                        const char* argument6[2]={"1"};
+//                        if(g==0){
+//                                if(arg_id_partition_master.compare("p")){
+//                                        arg_id_partition_master="b";
+//                                        arg_id_partition=arg_id_partition_master;			
+//                                }
+//                                }
+//                        else if(g==1){	
+//                                if(arg_id_partition_slave.compare("p")){
+//                                        arg_id_partition_slave="b";
+//                                        arg_id_partition=arg_id_partition_slave;			
+//                                }
+//
+//                                }		
+//                        ret=execlp(partitionTable[g],arg,(arg1[g]).c_str(),(arg2[g]).c_str(),(arg3[g]).c_str(),(arg4[g]).c_str(),arg_id_partition.c_str(),argument5,argument6,NULL);
+//					
+//                        if (ret==-1)
+//                        perror(" exec ");			
+//                        exit(0);
+//				
+//                        }
                 prec[g]=pid;
                 part_pid[g]=pid;
                 std::cout<<"IM the godfather and my PID is "<<(int) getpid()<<std::endl;
