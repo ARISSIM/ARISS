@@ -1,8 +1,8 @@
 CC 		:= g++
 
-INCLUDE_DIR	:= sources/libApexArinc653/include
+INCLUDE_DIR	:= $(shell pwd)/include/libApexArinc653 #$(shell pwd)/include/libApexArinc653Jni
 CC_FLAGS_ALL	:= -Wall -pedantic -g
-LIBS		:= -lpthread -L$(shell pwd)/sources/libApexArinc653/dist/ -lApexArinc653
+LIBS		:= -lpthread -L$(shell pwd)/lib/ -lApexArinc653
 
 define SRC_2_OBJ
     $(foreach src,$(1),$(patsubst sources/%,build/%,$(src)))
@@ -21,7 +21,7 @@ all: lib targets
 build/%.o: sources/%.cpp
 	@echo "  [CC]    $< -> $@"
 	@mkdir -p $(dir $@)
-	@$(CC) $(CC_FLAGS_ALL) $(CC_FLAGS_SPEC) -I$(shell pwd)/sources/libApexArinc653/include -o $@ -c $< 
+	@$(CC) $(CC_FLAGS_ALL) $(CC_FLAGS_SPEC) -I$(INCLUDE_DIR) -o $@ -c $< 
 
 %.sym :
 	for path in $^ ; do \
@@ -32,8 +32,8 @@ build/%.o: sources/%.cpp
 binary/%.out:
 	@echo "  [CC]    $< -> $@"
 	@mkdir -p $(dir $@)
-	@echo -I$(shell pwd)/sources/libApexArinc653/include  -o $@ $^ $(LIBS)
-	@$(CC) -I$(shell pwd)/sources/libApexArinc653/include  -o $@ $^ $(LIBS)
+	@echo -I$(INCLUDE_DIR)  -o $@ $^ $(LIBS)
+	@$(CC) -I$(INCLUDE_DIR)  -o $@ $^ $(LIBS)
 
 # Overriden in rules.mk
 TARGETS :=
@@ -53,6 +53,7 @@ mrproper :
 	@find -name *~ | xargs rm -f
 	@find -name "*.fifo" | xargs rm -f
 	@(cd $(shell pwd)/sources/libApexArinc653/ && $(MAKE) $@)
+	@(cd $(shell pwd)/sources/libApexArinc653Jni/ && $(MAKE) $@)
 
 symlinks: $(SYMLINKS)
 	@echo symlinks created
@@ -63,8 +64,9 @@ info:
 	@echo Symlinks [$(SYMLINKS)]
 	
 link :
-	@export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(shell pwd)/sources/lib/dist
+	@export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(shell pwd)/lib
 
 	
 lib:
 	@(cd $(shell pwd)/sources/libApexArinc653/ && $(MAKE))
+	#@(cd $(shell pwd)/sources/libApexArinc653Jni/ && $(MAKE))

@@ -2,25 +2,25 @@ CC		:= g++
 
 CFLAGS= -fPIC -Wall #-fPIC -W -Wall -ansi -pedantic
 LDFLAGS=
-INCLUDE_DIR	:= ../../include/libApexArinc653
+INCLUDE_DIR	:= ../../include/libApexArinc653Jni
 BUILD_DIR	:=	
 
-EXEC=libApexArinc653.so
+EXEC=libApexArinc653Jni.so
 SRC= $(wildcard *.c)
-OBJ= $(SRC:%.c=../../build/libApexArinc653/%.o)
+OBJ= $(SRC:%.c=../../build/libApexArinc653Jni/%.o)
 
 all: $(EXEC)
 
-libApexArinc653.so: $(OBJ)
+libApexArinc653Jni.so: $(OBJ)
 	@echo "  [CC]    $< -> $@"
 	@$(CC) $(CFLAGS) -shared -o ../../lib/$@ $^ $(LDFLAGS) -I$(INCLUDE_DIR)
 
 
-../../build/libApexArinc653/%.o: %.c
+../../build/libApexArinc653Jni/%.o: %.c
 	@echo "  [CC]    $< -> $@"
 	@echo  $@ -c $< $(CFLAGS) -I$(INCLUDE_DIR)
 #	@mkdir -p $(dir $@)
-	@$(CC) -o $@ -c $< $(CFLAGS) ../../build/libApexArinc653 -I$(INCLUDE_DIR) 	
+	@$(CC) -o $@ -c $< $(CFLAGS) ../../build/libApexArinc653Jni -I$(INCLUDE_DIR) 	
 
 
 clean:
