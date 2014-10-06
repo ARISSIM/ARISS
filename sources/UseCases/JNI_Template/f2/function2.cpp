@@ -1,5 +1,5 @@
 /*
- * Use case Test-JNI function2.cpp
+ * Use case JNI_Template function2.cpp
  */
 #include "CBasefunction.h"
 #include <iostream>
@@ -19,7 +19,9 @@ int main(int argc, char *argv[]) {
     int portID;
     int sock;
     vector_get(&(myCvector.vqueuing_port), 0, &portID);
+    std::cout << "QueingPort : " << portID << std::endl;
     vector_get(&(myCvector.vqueuing_socket), 0, &sock);
+    std::cout << "Queuing socket : " << sock << std::endl;
     //    CQueuing Qservice;
 
     int ifmessage = 0;

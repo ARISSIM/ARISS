@@ -1,5 +1,5 @@
 /*
- * Use case Test-JNI function1.cpp
+ * Use case JNI_Template function1.cpp
  */
 #include "CBasefunction.h"
 #include <iostream>
@@ -25,7 +25,9 @@ int main(int argc, char *argv[])
         int portID;
         int sock;
         vector_get(&(myCvector.vqueuing_port), 0, &portID);
+        std::cout << "QueingPort : " << portID << std::endl;
         vector_get(&(myCvector.vqueuing_socket), 0, &sock);
+        std::cout << "Queuing socket : " << sock << std::endl;
         std::string emetteur = myCvector.emetteur;
         
         std::string commande = "java LibApexArinc653Jni " + name + " " + convertInt(portID) + " " + convertInt(sock) + " " + emetteur;
