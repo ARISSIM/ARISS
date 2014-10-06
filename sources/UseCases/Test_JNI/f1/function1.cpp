@@ -1,5 +1,9 @@
-#include "include/CBasefunction.h"
-
+/*
+ * Use case Test-JNI function1.cpp
+ */
+#include "CBasefunction.h"
+#include <iostream>
+#include <sstream>
 std::string convertInt(int num);
 
 int main(int argc, char *argv[])
@@ -18,11 +22,13 @@ int main(int argc, char *argv[])
     myCvector = init_communication(nbarg, argument, NULL);
         
         std::string name = argv[0];
-        int port = myCvector.vqueuing_port[0];
-        int sock = myCvector.vqueuing_socket[0];
+        int portID;
+        int sock;
+        vector_get(&(myCvector.vqueuing_port), 0, &portID);
+        vector_get(&(myCvector.vqueuing_socket), 0, &sock);
         std::string emetteur = myCvector.emetteur;
         
-        std::string commande = "java Arinc653JniCom " + name + " " + convertInt(port) + " " + convertInt(sock) + " " + emetteur;
+        std::string commande = "java LibApexArinc653Jni " + name + " " + convertInt(portID) + " " + convertInt(sock) + " " + emetteur;
         system(commande.c_str());
     
 }

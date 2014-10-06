@@ -1,3 +1,7 @@
+
+/*
+ * Use case Queueing function1.cpp
+ */
 #include "CBasefunction.h"
 
 #include <iostream>
@@ -25,10 +29,10 @@ int main(int argc, char *argv[]) {
     int ifmsg = 0;
     std::cout << "before loop" << std::endl;
 
-int portID;
-        int sock;
-        vector_get(&(myCvector.vqueuing_port), 0, &portID);
-        vector_get(&(myCvector.vqueuing_socket), 0, &sock);
+    int portID;
+    int sock;
+    vector_get(&(myCvector.vqueuing_port), 0, &portID);
+    vector_get(&(myCvector.vqueuing_socket), 0, &sock);
     for (int i = 0; i < 20; i++) {
 
         std::cout << "into the loop" << std::endl;

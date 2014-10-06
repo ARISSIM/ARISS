@@ -1,7 +1,9 @@
-#include "include/CBasefunction.h"
-
-int main(int argc, char *argv[])
-{
+/*
+ * Use case Test-JNI function2.cpp
+ */
+#include "CBasefunction.h"
+#include <iostream>
+int main(int argc, char *argv[]) {
     int redemarrage = atoi(argv[7]);
     int position = atoi(argv[6]);
     GUI_ARINC_partition("Partition2", position, redemarrage);
@@ -13,19 +15,29 @@ int main(int argc, char *argv[])
     }
     COMMUNICATION_VECTOR myCvector;
     myCvector = init_communication(nbarg, argument, NULL);
-
-
-    CQueuing Qservice;
+    Type_Message rMessage;
+    int portID;
+    int sock;
+    vector_get(&(myCvector.vqueuing_port), 0, &portID);
+    vector_get(&(myCvector.vqueuing_socket), 0, &sock);
+    //    CQueuing Qservice;
 
     int ifmessage = 0;
 
     for (;;) {
-        std::cout << "debur boucle for, vqueuing_socket[0] : " << myCvector.vqueuing_socket[0] << std::endl;
+        std::cout << "debur boucle for, vqueuing_socket[0] : " << sock << std::endl;
 
-        ifmessage = Qservice.READ_QUEUING_MESSAGE(myCvector.vqueuing_socket[0]);
-        if (ifmessage > 0)
-            Qservice.Display_Message();
+        ifmessage = RECEIVE_QUEUING_MESSAGE(sock, &rMessage);
+        if (ifmessage > 0) {
+            //            Qservice.Display_Message();
+            std::cout << "			" << std::endl;
+            std::cout << "Display message : " << rMessage.m_message << std::endl;
+            std::cout << "length " << rMessage.m_length << std::endl;
+            std::cout << "total length " << sizeof (rMessage) << std::endl;
+            std::cout << "receive :" << rMessage.m_message << std::endl;
+            std::cout << "			" << std::endl;
+        }
+
     }
-
+    return 0;
 }
-

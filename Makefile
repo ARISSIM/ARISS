@@ -1,8 +1,13 @@
+####################################
+# ARINC653-simulator head Makefile #
+####################################
 CC 		:= g++
 
 INCLUDE_DIR	:= $(shell pwd)/include/libApexArinc653 #$(shell pwd)/include/libApexArinc653Jni
 CC_FLAGS_ALL	:= -Wall -pedantic -g
 LIBS		:= -lpthread -L$(shell pwd)/lib/ -lApexArinc653
+LIBAPEXARINC653_DIR	:= sources/libApexArinc653
+LIBAPEXARINC653JNI_DIR	:= sources/libApexArinc653Jni
 
 define SRC_2_OBJ
     $(foreach src,$(1),$(patsubst sources/%,build/%,$(src)))
@@ -68,5 +73,5 @@ link :
 
 	
 lib:
-	@(cd $(shell pwd)/sources/libApexArinc653/ && $(MAKE))
-	#@(cd $(shell pwd)/sources/libApexArinc653Jni/ && $(MAKE))
+	@(cd $(LIBAPEXARINC653_DIR) && $(MAKE) $@)
+	@(cd $(LIBAPEXARINC653JNI_DIR) && $(MAKE) $@)

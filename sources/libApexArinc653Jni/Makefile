@@ -1,8 +1,13 @@
+##################################################
+# ARINC653-simulator libApexArinc653Jni Makefile #
+##################################################
+
 CC		:= g++
 
 CFLAGS= -fPIC -Wall #-fPIC -W -Wall -ansi -pedantic
 LDFLAGS=
-INCLUDE_DIR	:= ../../include/libApexArinc653Jni
+INCLUDE_DIR	:= -I../../include/libApexArinc653 -I../../include/libApexArinc653Jni -I/usr/lib/jvm/java-8-oracle/include -I/usr/lib/jvm/java-8-oracle/include/linux
+LIBS		:= -L../../lib/ -lApexArinc653
 BUILD_DIR	:=	
 
 EXEC=libApexArinc653Jni.so
@@ -13,14 +18,14 @@ all: $(EXEC)
 
 libApexArinc653Jni.so: $(OBJ)
 	@echo "  [CC]    $< -> $@"
-	@$(CC) $(CFLAGS) -shared -o ../../lib/$@ $^ $(LDFLAGS) -I$(INCLUDE_DIR)
+	@$(CC) $(CFLAGS) -shared -o ../../lib/$@ $^ $(LDFLAGS) $(INCLUDE_DIR) 	
 
 
 ../../build/libApexArinc653Jni/%.o: %.c
 	@echo "  [CC]    $< -> $@"
-	@echo  $@ -c $< $(CFLAGS) -I$(INCLUDE_DIR)
+	@echo  $@ -c $< $(CFLAGS) $(INCLUDE_DIR)
 #	@mkdir -p $(dir $@)
-	@$(CC) -o $@ -c $< $(CFLAGS) ../../build/libApexArinc653Jni -I$(INCLUDE_DIR) 	
+	@$(CC) -o $@ -c $(LIBS)  $< $(CFLAGS) ../../build/libApexArinc653Jni $(INCLUDE_DIR) 
 
 
 clean:
@@ -33,5 +38,3 @@ mrproper: clean
 info : 
 	@echo Exec [$(EXEC)]
 	@echo Objects [$(OBJ)]
-
-
