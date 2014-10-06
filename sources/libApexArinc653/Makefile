@@ -1,3 +1,7 @@
+###############################################
+# ARINC653-simulator libApexArinc653 Makefile #
+###############################################
+
 CC		:= g++
 
 CFLAGS= -fPIC -Wall #-fPIC -W -Wall -ansi -pedantic
