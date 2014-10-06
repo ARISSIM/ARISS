@@ -9,17 +9,21 @@ EXEC=libApexArinc653.so
 SRC= $(wildcard *.c)
 OBJ= $(SRC:%.c=../../build/libApexArinc653/%.o)
 
-all: $(EXEC)
+all: lib
+	
+lib : $(EXEC)
 
 libApexArinc653.so: $(OBJ)
 	@echo "  [CC]    $< -> $@"
+	@mkdir -p ../../lib
 	@$(CC) $(CFLAGS) -shared -o ../../lib/$@ $^ $(LDFLAGS) -I$(INCLUDE_DIR)
 
 
 ../../build/libApexArinc653/%.o: %.c
+	@pwd
 	@echo "  [CC]    $< -> $@"
 	@echo  $@ -c $< $(CFLAGS) -I$(INCLUDE_DIR)
-#	@mkdir -p $(dir $@)
+	@mkdir -p ../../build/libApexArinc653
 	@$(CC) -o $@ -c $< $(CFLAGS) ../../build/libApexArinc653 -I$(INCLUDE_DIR) 	
 
 

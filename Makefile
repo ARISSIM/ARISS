@@ -73,5 +73,5 @@ link :
 
 	
 lib:
-	@(cd $(LIBAPEXARINC653_DIR) && $(MAKE) $@)
-	@(cd $(LIBAPEXARINC653JNI_DIR) && $(MAKE) $@)
+	@(cd $(sell pwd)$(LIBAPEXARINC653_DIR) && $(MAKE) $@)
+	@(cd $(sell pwd)$(LIBAPEXARINC653JNI_DIR) && $(MAKE) $@)
