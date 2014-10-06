@@ -21,14 +21,13 @@ lib: $(EXEC)
 libApexArinc653Jni.so: $(OBJ)
 	@echo "  [CC]    $< -> $@"
 	@mkdir -p ../../lib
-	@$(CC) $(CFLAGS) -shared -o ../../lib/$@ $^ $(LDFLAGS) $(INCLUDE_DIR) 	
+	@$(CC) $(CFLAGS) -shared -o ../../lib/$@ $^ $(LDFLAGS) $(INCLUDE_DIR) $(LIBS)
 
 
 ../../build/libApexArinc653Jni/%.o: %.c
 	@echo "  [CC]    $< -> $@"
-	@echo  $@ -c $< $(CFLAGS) $(INCLUDE_DIR)
 	@mkdir -p ../../build/libApexArinc653Jni
-	@$(CC) -o $@ $<  $(LIBS) $(CFLAGS) $(INCLUDE_DIR)
+	@$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE_DIR)
 
 
 clean:

@@ -28,7 +28,7 @@ libApexArinc653.so: $(OBJ)
 	@echo "  [CC]    $< -> $@"
 	@echo  $@ -c $< $(CFLAGS) -I$(INCLUDE_DIR)
 	@mkdir -p ../../build/libApexArinc653
-	@$(CC) -o $@ -c $< $(CFLAGS) ../../build/libApexArinc653 -I$(INCLUDE_DIR) 	
+	@$(CC) $(CFLAGS) -o $@ -c $< -I$(INCLUDE_DIR) 	
 
 
 clean:
