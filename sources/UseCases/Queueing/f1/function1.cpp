@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
     }
     std::cout << "INIT TO START FROM F1 " << argument[0] << " " << argument[1]<< " " <<argument[2]<< " " << argument[3]<< " " << argument[4] << std::endl;
     COMMUNICATION_VECTOR myCvector;
-    myCvector = init_communication(nbarg, argument, NULL);
+    myCvector = init_communication(argument, NULL);
     std::cout << "INIT COM DONE" << std::endl;
     //////////////////////
     //INIT comm Queuing //

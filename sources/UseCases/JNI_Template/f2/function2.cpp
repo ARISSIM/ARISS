@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
         argument[i] = argv[i];
     }
     COMMUNICATION_VECTOR myCvector;
-    myCvector = init_communication(nbarg, argument, NULL);
+    myCvector = init_communication(argument, NULL);
     Type_Message rMessage;
     int portID;
     int sock;

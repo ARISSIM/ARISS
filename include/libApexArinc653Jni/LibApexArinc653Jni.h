@@ -17,11 +17,43 @@ JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_writeSamplingMessage
 
 /*
  * Class:     LibApexArinc653Jni
+ * Method:    readSamplingMessage
+ * Signature: (ILTypeMessage;)I
+ */
+JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_readSamplingMessage
+  (JNIEnv *, jobject, jint, jobject);
+
+/*
+ * Class:     LibApexArinc653Jni
  * Method:    sendQueuingMessage
  * Signature: (Ljava/lang/String;IILjava/lang/String;Ljava/lang/String;)I
  */
 JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_sendQueuingMessage
   (JNIEnv *, jobject, jstring, jint, jint, jstring, jstring);
+
+/*
+ * Class:     LibApexArinc653Jni
+ * Method:    receiveQueuingMessage
+ * Signature: (ILTypeMessage;)I
+ */
+JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_receiveQueuingMessage
+  (JNIEnv *, jobject, jint, jobject);
+
+///*
+// * Class:     LibApexArinc653Jni
+// * Method:    initCommunication
+// * Signature: (Ljava/lang/String;Ljava/lang/String;)LCommunicationVector;
+// */
+//JNIEXPORT jobject JNICALL Java_LibApexArinc653Jni_initCommunication
+//  (JNIEnv *, jobject, jstring, jstring);
+//
+///*
+// * Class:     LibApexArinc653Jni
+// * Method:    guiArincPartition
+// * Signature: (Ljava/lang/String;II)I
+// */
+//JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_guiArincPartition
+//  (JNIEnv *, jobject, jstring, jint, jint);
 
 #ifdef __cplusplus
 }

@@ -55,10 +55,12 @@ clean:
 
 mrproper :
 	@rm -f $(TARGETS) $(OBJECTS)
+	@rm -rf lib
 	@find -name *~ | xargs rm -f
 	@find -name "*.fifo" | xargs rm -f
 	@(cd $(shell pwd)/sources/libApexArinc653/ && $(MAKE) $@)
 	@(cd $(shell pwd)/sources/libApexArinc653Jni/ && $(MAKE) $@)
+	
 
 symlinks: $(SYMLINKS)
 	@echo symlinks created

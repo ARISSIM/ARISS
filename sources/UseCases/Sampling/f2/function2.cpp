@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
         argument[i] = argv[i];
     }
     COMMUNICATION_VECTOR myCvector;
-    myCvector = init_communication(nbarg, argument, NULL);
+    myCvector = init_communication(argument, NULL);
 
     int samp_port;
     vector_get(&(myCvector.vsamp_port), 0, &samp_port);

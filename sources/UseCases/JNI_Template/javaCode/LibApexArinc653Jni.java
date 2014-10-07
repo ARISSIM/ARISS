@@ -1,16 +1,104 @@
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Vector;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
- * @author ics
+ * @author Camille Fayollas
  */
+
+class TypeMessage{
+    private String sender;
+    private int length;
+    private String message;
+
+    TypeMessage(String sender, int length, String message) {
+        this.setSender(sender);
+        this.setLength(length);
+        this.setMessage(message);
+    }
+    
+    TypeMessage() {
+        this("",0,"");
+    }
+    
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+}
+
+class CommunicationVector{
+    private String sender;
+    private Vector samplingSockets = new Vector(10, 2);
+    private Vector queuingSockets = new Vector(10, 2);
+    private Vector samplingPorts = new Vector(10, 2);
+    private Vector queuingPorts = new Vector(10, 2);
+
+    CommunicationVector(String sender) {
+        this.setSender(sender);
+    }
+    
+    CommunicationVector() {
+        this.setSender("");
+    }
+            
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    public void addSamplingSocket(int sock){
+        samplingSockets.add(sock);
+    }
+    
+    public void addQueuingSocket(int sock){
+        queuingSockets.add(sock);
+    }
+    
+    public void addSamplingPort(int port){
+        samplingPorts.add(port);
+    }
+    
+    public void addQueuingPort(int port){
+        queuingPorts.add(port);
+    }
+    
+    public int getSamplingSocket(int index){
+        return (int)samplingSockets.elementAt(index);
+    }
+    
+    public int getQueuingSocket(int index){
+        return (int)queuingSockets.elementAt(index);
+    }
+    
+    public int getSamplingPort(int index){
+        return (int)samplingPorts.elementAt(index);
+    }
+    
+    public int getQueuingPort(int index){
+        return (int)queuingPorts.elementAt(index);
+    }
+}
+
 public class LibApexArinc653Jni {
 
     static {
@@ -19,15 +107,16 @@ public class LibApexArinc653Jni {
 
     //APEX ARINC 653 sampling communication
     private native int writeSamplingMessage(String jName, int jPortId, int jSock, String jEmetteur, String jMessage);
-//    int READ_SAMPLING_MESSAGE(int sock, Type_Message *rMessage);
+    private native int readSamplingMessage(int sock, TypeMessage rMessage);
 
     //APEX ARINC 653 queuing communication
     private native int sendQueuingMessage(String jName, int jPortId, int jSock, String jEmetteur, String jMessage);
-//    int RECEIVE_QUEUING_MESSAGE(int sock, Type_Message *rMessage);
-
+    private native int receiveQueuingMessage(int sock, TypeMessage rMessage);
+    
     //APEX ARINC 653 partition initialization
-//    int GUI_ARINC_partition(char* name_partition, int position, int redemarrage);
-//    COMMUNICATION_VECTOR init_communication(int nbarg, char* argument[], char** mode);
+//    private native CommunicationVector initCommunication(String arg, String mode);
+//    private native int guiArincPartition(String partitionName, int position, int restart);
+
     /**
      * @param args the command line arguments
      */

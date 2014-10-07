@@ -38,7 +38,7 @@ int GUI_ARINC_partition(char* name_partition, int position, int redemarrage);
 int GUI_ARINC_emulator();
 void GUI_ARINC_partition_kill(int pid_to_kill);
 
-COMMUNICATION_VECTOR init_communication(int nbarg, char* argument[], char** mode);
+COMMUNICATION_VECTOR init_communication(char* argument[], char** mode);
 
 //static int open_pipe(const char* Output_pipe, const char* Input_pipe, const char* name_partition);
 //static int create_pipe(const char* Output_pipe, const char* Input_pipe);

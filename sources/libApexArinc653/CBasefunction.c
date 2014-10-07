@@ -74,7 +74,6 @@ static int read_in_pipe(char* input_chain) {
 */
 
 int GUI_ARINC_partition(char* name_partition, int position, int redemarrage) {
-    printf("TOTOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\n");
     char name_machine[40];
     gethostname(name_machine, sizeof (name_machine));
     // Cleaning and creation of the "memory" folders (stable_memory and camera_memory)
@@ -169,7 +168,7 @@ int GUI_ARINC_emulator() {
 }
 
 /**********		inter partition communication   	**********/
-COMMUNICATION_VECTOR init_communication(int nbarg, char* argument[], char** mode) {
+COMMUNICATION_VECTOR init_communication(char* argument[], char** mode) {
     COMMUNICATION_VECTOR Cvector;
     Cvector.emetteur = argument[0]; //NOM DU BINAIRE QUI SERA SON IDENFIANT POUR COMMUNIQUER
     char* arg_samp_sock = argument[1]; //ligne à découper
