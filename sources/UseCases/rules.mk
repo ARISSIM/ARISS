@@ -36,6 +36,9 @@ include	$(dir)/rules.mk
 dir	:= $(d)/JNI_Template
 include	$(dir)/rules.mk
 
+dir	:= $(d)/petshop
+include	$(dir)/rules.mk
+
 #To add a new use case, duplicate the Template directory
 #dir	:= $(d)/Template
 #include	$(dir)/rules.mk

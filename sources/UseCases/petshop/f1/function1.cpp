@@ -1,4 +1,8 @@
 #include "CBasefunction.h"
+#include <iostream>
+#include <sstream>
+
+std::string intToString(int num);
 
 int main(int argc, char *argv[]) {
     int redemarrage = atoi(argv[7]);
@@ -18,7 +22,27 @@ int main(int argc, char *argv[]) {
      *  4/ Copy the argument in the following, they are split by a space charater
      * 	;*/
 
-    std::string argument[19];
+    int nbarg = argc;
+    char **arg = new char*[argc];
+    int i = 0;
+    for (i = 0; i <= nbarg; i++) {
+        arg[i] = argv[i];
+    }
+    COMMUNICATION_VECTOR myCvector;
+    myCvector = init_communication(arg, NULL);
+
+    std::string name = argv[0];
+    int portID;
+    int sock;
+    vector_get(&(myCvector.vqueuing_port), 0, &portID);
+    std::cout << "QueingPort : " << portID << std::endl;
+    vector_get(&(myCvector.vqueuing_socket), 0, &sock);
+    std::cout << "Queuing socket : " << sock << std::endl;
+    std::string emetteur = myCvector.emetteur;
+
+    std::string petshopArg = "\"" + name + " " + intToString(portID) + " " + intToString(sock) + " " + emetteur + "\"";
+
+    std::string argument[20];
     argument[0] = "/usr/lib/jvm/java-8-oracle/bin/java";
     argument[1] = "-Djdk.home=/usr/lib/jvm/java-8-oracle";
     argument[2] = "-classpath";
@@ -31,23 +55,22 @@ int main(int argc, char *argv[]) {
     argument[9] = "-Xms64m";
     argument[10] = "-XX:+HeapDumpOnOutOfMemoryError";
     argument[11] = "-XX:HeapDumpPath=/home/ics/.petshop/dev/var/log/heapdump.hprof";
-    argument[12] = "org.netbeans.Main";
-    argument[13] = "--cachedir";
-    argument[14] = "/home/ics/.petshop/dev/var/cache";
-    argument[15] = "--userdir";
-    argument[16] = "/home/ics/.petshop/dev";
-    argument[17] = "--branding";
-    argument[18] = "petshop";
+    argument[12] = "-Dapexname=" + petshopArg;   
+    argument[13] = "org.netbeans.Main";
+    argument[14] = "--cachedir";
+    argument[15] = "/home/ics/.petshop/dev/var/ca.home=/usr/lib/jvm/java-8-oraclche";
+    argument[16] = "--userdir";
+    argument[17] = "/home/ics/.petshop/dev";
+    argument[18] = "--branding";
+    argument[19] = "petshop";
 
-    ret = execlp("java", (argument[0]).c_str(), (argument[1]).c_str(), (argument[2]).c_str(), (argument[3]).c_str(), (argument[4]).c_str(), (argument[5]).c_str(), (argument[6]).c_str(), (argument[7]).c_str(), (argument[8]).c_str(), (argument[9]).c_str(), (argument[10]).c_str(), (argument[11]).c_str(), (argument[12]).c_str(), (argument[13]).c_str(), (argument[14]).c_str(), (argument[15]).c_str(), (argument[16]).c_str(), (argument[17]).c_str(),(argument[18]).c_str(), NULL);
+    ret = execlp("java", (argument[0]).c_str(), (argument[1]).c_str(), (argument[2]).c_str(), (argument[3]).c_str(), (argument[4]).c_str(), (argument[5]).c_str(), (argument[6]).c_str(), (argument[7]).c_str(), (argument[8]).c_str(), (argument[9]).c_str(), (argument[10]).c_str(), (argument[11]).c_str(), (argument[12]).c_str(), (argument[13]).c_str(), (argument[14]).c_str(), (argument[15]).c_str(), (argument[16]).c_str(), (argument[17]).c_str(), (argument[18]).c_str(), (argument[19]).c_str(), NULL);
     if (ret == -1)
         perror("Exec : ");
-    
+}
 
-
-
-    ret = execlp("java", (argument[0]).c_str(), (argument[1]).c_str(), (argument[2]).c_str(), (argument[3]).c_str(), (argument[4]).c_str(), (argument[5]).c_str(), (argument[6]).c_str(), (argument[7]).c_str(), (argument[8]).c_str(), (argument[9]).c_str(), (argument[10]).c_str(), (argument[11]).c_str(), NULL);
-    if (ret == -1)
-        perror("Exec : ");    
-
+std::string intToString(int num) {
+    std::stringstream ss;
+    ss << num;
+    return ss.str();
 }
