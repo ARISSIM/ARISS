@@ -1,3 +1,20 @@
+/*
+ * Copyright 2014 ics.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Vector;
@@ -6,99 +23,6 @@ import java.util.Vector;
  *
  * @author Camille Fayollas
  */
-
-class TypeMessage{
-    private String sender;
-    private int length;
-    private String message;
-
-    TypeMessage(String sender, int length, String message) {
-        this.setSender(sender);
-        this.setLength(length);
-        this.setMessage(message);
-    }
-    
-    TypeMessage() {
-        this("",0,"");
-    }
-    
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getSender() {
-        return sender;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-}
-
-class CommunicationVector{
-    private String sender;
-    private Vector samplingSockets = new Vector(10, 2);
-    private Vector queuingSockets = new Vector(10, 2);
-    private Vector samplingPorts = new Vector(10, 2);
-    private Vector queuingPorts = new Vector(10, 2);
-
-    CommunicationVector(String sender) {
-        this.setSender(sender);
-    }
-    
-    CommunicationVector() {
-        this.setSender("");
-    }
-            
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
-
-    public void addSamplingSocket(int sock){
-        samplingSockets.add(sock);
-    }
-    
-    public void addQueuingSocket(int sock){
-        queuingSockets.add(sock);
-    }
-    
-    public void addSamplingPort(int port){
-        samplingPorts.add(port);
-    }
-    
-    public void addQueuingPort(int port){
-        queuingPorts.add(port);
-    }
-    
-    public int getSamplingSocket(int index){
-        return (int)samplingSockets.elementAt(index);
-    }
-    
-    public int getQueuingSocket(int index){
-        return (int)queuingSockets.elementAt(index);
-    }
-    
-    public int getSamplingPort(int index){
-        return (int)samplingPorts.elementAt(index);
-    }
-    
-    public int getQueuingPort(int index){
-        return (int)queuingPorts.elementAt(index);
-    }
-}
-
 public class LibApexArinc653Jni {
 
     static {
@@ -116,31 +40,84 @@ public class LibApexArinc653Jni {
     //APEX ARINC 653 partition initialization
 //    private native CommunicationVector initCommunication(String arg, String mode);
 //    private native int guiArincPartition(String partitionName, int position, int restart);
-
+    
     /**
-     * @param args the command line arguments
+     *
+     * @param name
+     * @param portId
+     * @param sock
+     * @param message
+     * @param sender
+     * @return
      */
-    public static void main(String[] args) {
-        System.out.println("Init Partition 1");
-        String name = args[0];
-        System.out.println("name = " + name);
-        int port = Integer.parseInt(args[1]);
-        System.out.println("port = " + port);
-        int sock = Integer.parseInt(args[2]);
-        System.out.println("sock = " + sock);
-        String emetteur = args[3];
-        System.out.println("emetteur = " + emetteur);
-        int i = 0;
-        for (i = 0; i < 20; i++) {
-            System.out.println("<<<< Sendind message n° " + i + ">>>>");
-            String msg = "New message n° " + i;
-            new LibApexArinc653Jni().sendQueuingMessage(name, port, sock, emetteur, msg);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(LibApexArinc653Jni.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+    public static int pWriteSamplingMessage(String name, int portId, int sock, String sender, String message) {
+        LibApexArinc653Jni lib = new LibApexArinc653Jni();
+        int toReturn = lib.writeSamplingMessage(name, portId, sock, sender, message);
+        return toReturn;
+    }
+    
+    /**
+     *
+     * @param sock
+     * @param rMessage
+     * @return
+     */
+    public static int pReadSamplingMessage(int sock, TypeMessage rMessage) {
+        LibApexArinc653Jni lib = new LibApexArinc653Jni();
+        int toReturn = lib.readSamplingMessage(sock, rMessage);
+        return toReturn;
     }
 
+    /**
+     *
+     * @param name
+     * @param portId
+     * @param sock
+     * @param message
+     * @param sender
+     * @return
+     */
+    public static int pSendQueuingMessage(String name, int portId, int sock, String sender, String message) {
+        LibApexArinc653Jni lib = new LibApexArinc653Jni();
+        int toReturn = lib.sendQueuingMessage(name, portId, sock, sender, message);
+        return toReturn;
+    }    
+    
+    /**
+     *
+     * @param sock
+     * @param rMessage
+     * @return
+     */
+    public static int pReceiveQueuingMessage(int sock, TypeMessage rMessage) {
+        LibApexArinc653Jni lib = new LibApexArinc653Jni();
+        int toReturn = lib.receiveQueuingMessage(sock, rMessage);
+        return toReturn;
+    }
+    
+//    /**
+//     *
+//     * @param arg
+//     * @param mode
+//     * @return
+//     */
+//    public static CommunicationVector pInitCommunication(String arg, String mode) {
+//        LibApexArinc653Jni lib = new LibApexArinc653Jni();
+//        CommunicationVector cVector = lib.initCommunication(arg, mode);
+//        return cVector;
+//    }
+//    
+//    
+//    /**
+//     *
+//     * @param partitionName
+//     * @param position
+//     * @param restart
+//     * @return
+//     */
+//    public static int pGuiArincPartition(String partitionName, int position, int restart) {
+//        LibApexArinc653Jni lib = new LibApexArinc653Jni();
+//        int toReturn = lib.guiArincPartition(partitionName, position, restart);
+//        return toReturn;
+//    }
 }

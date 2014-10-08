@@ -1,24 +1,44 @@
+/*
+ * Use case petshop function2.cpp
+ */
 #include "CBasefunction.h"
 #include <iostream>
-
 int main(int argc, char *argv[]) {
     int redemarrage = atoi(argv[7]);
     int position = atoi(argv[6]);
     GUI_ARINC_partition("Partition2", position, redemarrage);
-    std::cout << "write \"exit\" to stop the partitiion 2" << std::endl;
-    char * input_chain= NULL;
-    int ret=0;
-    for (;;) {
-        std::cout << "in looop" << input_chain << std::endl;
-
-
-        std::cin>>input_chain;
-        std::cout << "you wrote : " << input_chain << std::endl;
-        ret= strcmp(input_chain,"exit");
-        if (ret==0) {
-            std::cout << "now exiting the partiton" << input_chain << std::endl;
-            return (0);
-        }
+    int nbarg = argc;
+    char **argument = new char*[argc];
+    int i = 0;
+    for (i = 0; i <= nbarg; i++) {
+        argument[i] = argv[i];
     }
+    COMMUNICATION_VECTOR myCvector;
+    myCvector = init_communication(argument, NULL);
+    Type_Message rMessage;
+    int portID;
+    int sock;
+    vector_get(&(myCvector.vqueuing_port), 0, &portID);
+    vector_get(&(myCvector.vqueuing_socket), 0, &sock);
+    //    CQueuing Qservice;
+
+    int ifmessage = 0;
+
+    for (;;) {
+        std::cout << "debur boucle for, vqueuing_socket[0] : " << sock << std::endl;
+
+        ifmessage = RECEIVE_QUEUING_MESSAGE(sock, &rMessage);
+        if (ifmessage > 0) {
+            //            Qservice.Display_Message();
+            std::cout << "			" << std::endl;
+            std::cout << "Display message : " << rMessage.m_message << std::endl;
+            std::cout << "length " << rMessage.m_length << std::endl;
+            std::cout << "total length " << sizeof (rMessage) << std::endl;
+            std::cout << "receive :" << rMessage.m_message << std::endl;
+            std::cout << "			" << std::endl;
+        }
+
+    }
+    return 0;
 }
 

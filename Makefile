@@ -5,7 +5,7 @@ CC 		:= g++
 
 INCLUDE_DIR	:= $(shell pwd)/include/libApexArinc653 #$(shell pwd)/include/libApexArinc653Jni
 CC_FLAGS_ALL	:= -Wall -pedantic -g
-LIBS		:= -lpthread -L$(shell pwd)/lib/ -lApexArinc653
+LIBS		:= -lpthread -L$(shell pwd)/lib/ -lApexArinc653 -Wl,-rpath $(shell pwd)/lib
 LIBAPEXARINC653_DIR	:= sources/libApexArinc653
 LIBAPEXARINC653JNI_DIR	:= sources/libApexArinc653Jni
 
@@ -71,7 +71,11 @@ info:
 	@echo Symlinks [$(SYMLINKS)]
 	
 link :
-	@export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(shell pwd)/lib
+	#@export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(shell pwd)/lib
+	#LD_LIBRARY_PATH=$(shell pwd)/lib
+	#export LD_LIBRARY_PATH
+	#LD_RUN_PATH=$(shell pwd)/lib
+	#export LD_RUN_PATH
 
 	
 lib:

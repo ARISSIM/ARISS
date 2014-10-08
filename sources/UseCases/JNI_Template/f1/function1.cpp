@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
         std::cout << "Queuing socket : " << sock << std::endl;
         std::string emetteur = myCvector.emetteur;
         
-        std::string commande = "java LibApexArinc653Jni " + name + " " + convertInt(portID) + " " + convertInt(sock) + " " + emetteur;
+        std::string commande = "java TestJNI " + name + " " + convertInt(portID) + " " + convertInt(sock) + " " + emetteur;
         system(commande.c_str());
     
 }
