@@ -159,10 +159,10 @@ class gui_for_ARINC_653(Tk):
 		FrameSizeX  = int(ScreenSizeX * 0.5) - CorrectionX
 		FrameSizeY  = int(ScreenSizeY * 0.5) - CorrectionY
 
-		if sys.argv[3] == "Master" : # Find left and up border of window
+		if ((sys.argv[3] == "Master") or (sys.argv[3] == "Partition1")) : # Find left and up border of window
 			FramePosX   = 0
 			FramePosY   = 0
-		elif sys.argv[3] =="Slave":
+		elif ((sys.argv[3] == "Slave") or (sys.argv[3] == "Partition2")) :
 			FramePosX   = 0
 			FramePosY   = ScreenSizeY/2 + CorrectionY
 		elif sys.argv[3] =="Scao":

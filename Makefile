@@ -71,11 +71,7 @@ info:
 	@echo Symlinks [$(SYMLINKS)]
 	
 link :
-	#@export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(shell pwd)/lib
-	#LD_LIBRARY_PATH=$(shell pwd)/lib
-	#export LD_LIBRARY_PATH
-	#LD_RUN_PATH=$(shell pwd)/lib
-	#export LD_RUN_PATH
+	@export LD_LIBRARY_PATH=$(shell pwd)/lib/
 
 	
 lib:
