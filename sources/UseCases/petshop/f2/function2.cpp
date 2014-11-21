@@ -23,21 +23,20 @@ int main(int argc, char *argv[]) {
     //    CQueuing Qservice;
 
     int ifmessage = 0;
+    char sMessage[256];
+    int j = 0;
 
     for (;;) {
-        std::cout << "debur boucle for, vqueuing_socket[0] : " << sock << std::endl;
-
         ifmessage = RECEIVE_QUEUING_MESSAGE(sock, &rMessage);
         if (ifmessage > 0) {
-            //            Qservice.Display_Message();
             std::cout << "			" << std::endl;
-            std::cout << "Display message : " << rMessage.m_message << std::endl;
-            std::cout << "length " << rMessage.m_length << std::endl;
-            std::cout << "total length " << sizeof (rMessage) << std::endl;
-            std::cout << "receive :" << rMessage.m_message << std::endl;
-            std::cout << "			" << std::endl;
+            std::cout << "Message from: " << rMessage.m_sender << " Length: " << rMessage.m_length << std::endl;
+            std::cout << "Message: " << rMessage.m_message << std::endl;
         }
-
+        
+        sprintf(sMessage, "Message sent from Partition2 number: %d", j);
+        SEND_QUEUING_MESSAGE(argv[0], portID, sock, myCvector.emetteur, rMessage.m_message);
+        j++;
     }
     return 0;
 }
