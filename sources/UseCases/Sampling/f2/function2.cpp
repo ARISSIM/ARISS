@@ -21,6 +21,7 @@ int main(int argc, char *argv[]) {
     vector_get(&(myCvector.vsamp_socket), 0, &samp_socket);
 
     Type_Message *rMessage;
+    char sMessage[256];
 
     int ret;
 
@@ -31,16 +32,22 @@ int main(int argc, char *argv[]) {
     //
     //COMMUNICATION_VECTOR init_communication(int nbarg, char* argument[], char** mode);    
     for (;;) {
-        ret = READ_SAMPLING_MESSAGE(samp_socket, rMessage);
+        std::cout << "In boucle for" << std::endl;
         
-        std::cout << "			" << std::endl;
-        std::cout << "message from : " << rMessage->m_sender << " length : " << rMessage->m_length << std::endl;
-        std::cout << "receive :" << rMessage->m_message << std::endl;
-        std::cout << "			" << std::endl;
-        std::cout << "ret" << ret << std::endl;
+        ret = READ_SAMPLING_MESSAGE(samp_socket, rMessage);
+        std::cout << "RET: " << ret << std::endl;
+        if (ret > 0) {
+            std::cout << "			" << std::endl;
+            std::cout << "Message from: " << rMessage->m_sender << " Length: " << rMessage->m_length << std::endl;
+            std::cout << "Message: " << rMessage->m_message << std::endl;
+        }else{
+            std::cout << "			" << std::endl;
+            std::cout << "No new message" << std::endl;
+        }
+        
+        sprintf(sMessage, "Hello");
+        WRITE_SAMPLING_MESSAGE(argv[0], samp_port, samp_socket, myCvector.emetteur, sMessage);
 
-        std::cout << "ret" << ret << std::endl;
-        WRITE_SAMPLING_MESSAGE(argv[0], samp_port, samp_socket, myCvector.emetteur, " Hello");
         sleep(1);
     }
 
