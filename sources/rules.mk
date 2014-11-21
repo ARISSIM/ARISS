@@ -1,3 +1,8 @@
+######################
+# ARINC653-simulator #
+######################
+# Sources head rules.mk
+
 sp 		:= $(sp).x
 dirstack_$(sp)	:= $(d)
 d		:= $(dir)

@@ -1,3 +1,8 @@
+######################
+# ARINC653-simulator #
+######################
+# UseCases rules.mk
+
 sp 		:= $(sp).x
 dirstack_$(sp)	:= $(d)
 d		:= $(dir)
