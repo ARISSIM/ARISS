@@ -27,39 +27,30 @@ int main(int argc, char *argv[]) {
     //////////////////////
     //    CQueuing Qservice;
     int ifmsg = 0;
-    std::cout << "before loop" << std::endl;
-
+    int j = 0;
     int portID;
     int sock;
     vector_get(&(myCvector.vqueuing_port), 0, &portID);
     vector_get(&(myCvector.vqueuing_socket), 0, &sock);
-    for (int i = 0; i < 20; i++) {
-
-        std::cout << "into the loop" << std::endl;
-
-        char result[256];
-        sprintf(result, "message envoye depuis f1 numero %d", i);
-        
-        SEND_QUEUING_MESSAGE(argv[0], portID, sock, myCvector.emetteur, result);
-        //     Qservice.WRITE_QUEUING_MESSAGE(argv[0], myCvector.vqueuing_port[0], myCvector.vqueuing_socket[0], myCvector.emetteur, result);
-        std::cout << "queuing message wrote to the port :" << portID << std::endl;
-        sleep(1);
-    }
-
-
+    
     for (;;) {
-
-        std::cout << "Dans le boucle for, vqueuing_socket[0] : " << sock << std::endl;
+        char sMessage[256];
+        sprintf(sMessage, "Message envoye depuis f1 numero %d", j);
+        std::cout << "			" << std::endl;
+        std::cout << ">>> Sending message: " << sMessage << std::endl;
+        SEND_QUEUING_MESSAGE(argv[0], portID, sock, myCvector.emetteur, sMessage);
+        j++;
+        
         ifmsg = RECEIVE_QUEUING_MESSAGE(sock, &rMessage);
-        //Qservice.READ_QUEUING_MESSAGE(sock);
         if (ifmsg > 0) {
             std::cout << "			" << std::endl;
-            std::cout << "Display message : " << rMessage.m_message << std::endl;
-            std::cout << "length " << rMessage.m_length << std::endl;
-            std::cout << "total length " << sizeof (rMessage) << std::endl;
-            std::cout << "receive :" << rMessage.m_message << std::endl;
-            std::cout << "			" << std::endl;
+            std::cout << "<<< Receiving message from: " << rMessage.m_sender << " - Length: " << rMessage.m_length << std::endl;
+            std::cout << "<<< Message: " << rMessage.m_message << std::endl;
+        }else{
+            std::cout << "<<< No new message" << std::endl;
         }
+        
+        sleep(1);
     }
         return 0;
 }

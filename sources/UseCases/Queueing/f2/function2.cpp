@@ -20,24 +20,29 @@ int main(int argc, char *argv[]) {
     int sock;
     vector_get(&(myCvector.vqueuing_port), 0, &portID);
     vector_get(&(myCvector.vqueuing_socket), 0, &sock);
-    //    CQueuing Qservice;
 
-    int ifmessage = 0;
+    int ifmsg = 0;
+    int j = 0;
 
     for (;;) {
-        std::cout << "debur boucle for, vqueuing_socket[0] : " << sock << std::endl;
-
-        ifmessage = RECEIVE_QUEUING_MESSAGE(sock, &rMessage);
-        if (ifmessage > 0) {
-            //            Qservice.Display_Message();
+        char sMessage[256];
+        sprintf(sMessage, "Message envoye depuis f2 numero %d", j);
+        std::cout << "			" << std::endl;
+        std::cout << ">>> Sending message: " << sMessage << std::endl;
+        SEND_QUEUING_MESSAGE(argv[0], portID, sock, myCvector.emetteur, sMessage);
+        j++;
+        std::cout << "Queuing message sent: " << sMessage << std::endl;
+        
+        ifmsg = RECEIVE_QUEUING_MESSAGE(sock, &rMessage);
+        if (ifmsg > 0) {
             std::cout << "			" << std::endl;
-            std::cout << "Display message : " << rMessage.m_message << std::endl;
-            std::cout << "length " << rMessage.m_length << std::endl;
-            std::cout << "total length " << sizeof (rMessage) << std::endl;
-            std::cout << "receive :" << rMessage.m_message << std::endl;
-            std::cout << "			" << std::endl;
+            std::cout << "<<< Receiving message from: " << rMessage.m_sender << " - Length: " << rMessage.m_length << std::endl;
+            std::cout << "<<< Message: " << rMessage.m_message << std::endl;
+        }else{
+            std::cout << "No new message" << std::endl;
         }
-
+        
+        sleep(1);
     }
     return 0;
 }
