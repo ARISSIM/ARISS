@@ -46,6 +46,7 @@ int READ_SAMPLING_MESSAGE(int sock, Type_Message *rMessage) {
     struct sockaddr_in c_a;
     int lc_a; //longueur structure
     fd_set readfds;
+    Type_Message rcvMsg;
 
     int ret = 0; // test variable for the function's' return
     int le_t = 0; //retunr code for recvfrom
@@ -57,7 +58,7 @@ int READ_SAMPLING_MESSAGE(int sock, Type_Message *rMessage) {
     FD_SET(sock, &readfds);
 
     int last_message_in_queue = 0;
-    
+
 
     //std::cout<<"<Sampling/R> Trying to read at socket " << sock << "..."<<std::endl;
 
@@ -70,17 +71,17 @@ int READ_SAMPLING_MESSAGE(int sock, Type_Message *rMessage) {
             if (ret != 0) {
                 //std::cout<<"<Sampling/R> Detection of something at socket " << sock << "..."<<std::endl;
                 lc_a = sizeof (c_a);
-                if ((le_t = recvfrom(sock, &rMessage, sizeof (Type_Message), 0, (struct sockaddr *) &c_a, (socklen_t *) & lc_a)) == -1) {
+                if ((le_t = recvfrom(sock, &rcvMsg, sizeof (Type_Message), 0, (struct sockaddr *) &c_a, (socklen_t *) & lc_a)) == -1) {
                     printf("<Sampling/R> Cannot read message at socket %d. (recvfrom)\n", sock);
                     perror("recvfrom");
                     close(sock);
-                   // *rMessage = NULL;
+                    *rMessage = rcvMsg;
                     return (le_t); //return code are the same as recvfrom : -1 if error, or 0 if the sender has made an ordernly shutdown
                 }
                 last_message_in_queue = 0;
             } else {
                 last_message_in_queue = 1;
-                //myReceivedMessage = *rMessage;
+                *rMessage = rcvMsg;
                 //std::cout<<"<Sampling/R> Message received."<<std::endl;	
                 return (le_t); // return the size of the recived message
             }
