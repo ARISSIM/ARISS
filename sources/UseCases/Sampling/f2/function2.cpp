@@ -21,35 +21,32 @@ int main(int argc, char *argv[]) {
     vector_get(&(myCvector.vsamp_socket), 0, &samp_socket);
 
     Type_Message *rMessage;
+
     char sMessage[256];
-
-    int ret;
-
-    //int WRITE_SAMPLING_MESSAGE(char *name, int portId, int sock,char *emetteur, char *message);
-    //int READ_SAMPLING_MESSAGE(int sock, Type_Message *rMessage);
-    //        int GUI_ARINC_partition(char* name_partition, int position, int redemarrage);
-    //void GUI_ARINC_partition_kill(int pid_to_kill);
-    //
-    //COMMUNICATION_VECTOR init_communication(int nbarg, char* argument[], char** mode);    
+    i = 0;
+    int ret = 0;
     for (;;) {
-        std::cout << "In boucle for" << std::endl;
         
-        ret = READ_SAMPLING_MESSAGE(samp_socket, rMessage);
-        std::cout << "RET: " << ret << std::endl;
-        if (ret > 0) {
-            std::cout << "			" << std::endl;
-            std::cout << "Message from: " << rMessage->m_sender << " Length: " << rMessage->m_length << std::endl;
-            std::cout << "Message: " << rMessage->m_message << std::endl;
-        }else{
-            std::cout << "			" << std::endl;
-            std::cout << "No new message" << std::endl;
-        }
-        
-        sprintf(sMessage, "Hello");
+        sprintf(sMessage, "message envoye depuis f2 numero %d", i);
+        std::cout << "			" << std::endl;
+        std::cout << ">>> Sending message: " << sMessage << std::endl;
         WRITE_SAMPLING_MESSAGE(argv[0], samp_port, samp_socket, myCvector.emetteur, sMessage);
 
+        ret = READ_SAMPLING_MESSAGE(samp_socket, rMessage);
+
+        if (ret > 0) {
+            std::cout << "			" << std::endl;
+            std::cout << "<<< Receiving message from: " << rMessage->m_sender << " - Length: " << rMessage->m_length << std::endl;
+            std::cout << "<<< Message: " << rMessage->m_message << std::endl;
+        }else{
+            std::cout << "			" << std::endl;
+            std::cout << "<<< No new message" << std::endl;
+        }
+        
+        i++;
         sleep(1);
     }
+
 
 
 }

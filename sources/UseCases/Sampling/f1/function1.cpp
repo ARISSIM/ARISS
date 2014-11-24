@@ -28,18 +28,19 @@ int main(int argc, char *argv[]) {
     for (;;) {
         
         sprintf(sMessage, "message envoye depuis f1 numero %d", i);
-        std::cout << "TEXTE A EMETTRE: " << sMessage << std::endl;
+        std::cout << "			" << std::endl;
+        std::cout << ">>> Sending message: " << sMessage << std::endl;
         WRITE_SAMPLING_MESSAGE(argv[0], samp_port, samp_socket, myCvector.emetteur, sMessage);
 
         ret = READ_SAMPLING_MESSAGE(samp_socket, rMessage);
 
         if (ret > 0) {
             std::cout << "			" << std::endl;
-            std::cout << "Message from: " << rMessage->m_sender << " Length: " << rMessage->m_length << std::endl;
-            std::cout << "Message: " << rMessage->m_message << std::endl;
+            std::cout << "<<< Receiving message from: " << rMessage->m_sender << " - Length: " << rMessage->m_length << std::endl;
+            std::cout << "<<< Message: " << rMessage->m_message << std::endl;
         }else{
             std::cout << "			" << std::endl;
-            std::cout << "No new message" << std::endl;
+            std::cout << "<<< No new message" << std::endl;
         }
         
         i++;
