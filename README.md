@@ -1,18 +1,12 @@
-ARINC653-simulator
+ARISS: ARINC_653 Standard Simulator
 ==================
 
-An UNIX simulator following the ARINC 653 concept of time and space partitionning and ARINC 653 communication
+An ARINC653 kernel simulator implementing the Time and Space Partitioning concept (TSP) has been developed on Linux.
 
-Copyright (c) 2014 Martin CRONEL
+This code is distributed under MIT and CeCILL-B licences, available at http://opensource.org/licenses/MIT and http://www.cecill.info/licences/ respectively.
 
-This code is distributed under MIT and CeCILL-B licence, availaible at the root of the project
-or at http://opensource.org/licenses/MIT and http://www.cecill.info/licences/
+You can find the source of ARINC 653 simulator at https://github.com/makrin/ARINC653-simulator
 
+This project was initially developed at LAAS-CNRS ( https://www.laas.fr/public/en/tsf) under the supervision of Prof. Jean-Charles Fabre (INPT-ENSEEIHT) as a tool for education and research. The first version was developed by Gabriel BUSTAMENTE, Rémi PALUSTRAN and Martin CRONEL, former student of INPT-ENSEEIHT dept GEA. The current version has been developed and is maintained by Martin CRONEL.
 
-you can find the source of ARINC 653 simulator at https://github.com/makrin/ARINC653-simulator
-
-
-This project was initialy coded for universitary purpose under the impulse and supervising of Prof. Jean-Charles Fabre (INPT-ENSEEIHT) as a tool for research and education.
-Initial coding by Gabriel BUSTAMENTE, Rémi PALUSTRAN and Martin CRONEL, former student of INPT-ENSEEIHT dept GEA - AII, working in the TSF team of LAAS CNRS https://www.laas.fr/public/en/tsf
-
-You can find details of the project architecture and how does it work in the ReadMe directory.
+You can find details on the software architecture and on its use in the ReadMe directory.
