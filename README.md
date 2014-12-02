@@ -1,4 +1,4 @@
-ARISS: ARINC_653 Standard Simulator
+ARISS: ARINC653 Standard Simulator
 ==================
 
 An ARINC653 kernel simulator implementing the Time and Space Partitioning concept (TSP) has been developed on Linux.
