@@ -34,9 +34,15 @@ int main(int argc, char *argv[]) {
         sprintf(sMessage, "message envoye depuis f2 numero %d", i);
         std::cout << "			" << std::endl;
         std::cout << ">>> Sending message: " << sMessage << std::endl;
+
+        std::cout << "before write" << std::endl; /////////////////////////////////////////////////////////////
+        std::cout << argv[0]<< samp_port<< samp_socket<< myCvector.emetteur<< sMessage<<std::endl;
         WRITE_SAMPLING_MESSAGE(argv[0], samp_port, samp_socket, myCvector.emetteur, sMessage);
+        std::cout << "after write" << std::endl; /////////////////////////////////////////////////////////////
+        std::cout << "before read" << std::endl; /////////////////////////////////////////////////////////////
 
         ret = READ_SAMPLING_MESSAGE(samp_socket, rMessage);
+        std::cout << "after read" << std::endl; /////////////////////////////////////////////////////////////
 
         if (ret > 0) {
             std::cout << "			" << std::endl;

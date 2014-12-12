@@ -9,7 +9,8 @@
 #include <stdio.h>
 
 int WRITE_SAMPLING_MESSAGE(char *name, int portId, int sock, char *emetteur, char *message) {
-    printf("<Sampling/W> Entering Write\n"); ///////////////////////////////////////////////////    
+    printf("<Sampling/W> Entering Write\n"); ///////////////////////////////////////////////////  
+    fflush(stdout);
     const char *str1 = message; //convert char to const char    
     Type_Message myMessage;
     strcpy(myMessage.m_message, str1);
@@ -17,18 +18,26 @@ int WRITE_SAMPLING_MESSAGE(char *name, int portId, int sock, char *emetteur, cha
     const char *str2 = emetteur;
     strcpy(myMessage.m_sender, str2);
     struct hostent *s_h;
+    printf("before gethostbyname\n");
+    fflush(stdout);
     if ((s_h = gethostbyname(name)) == NULL) {
         printf("<Sampling/W> Problem with gethostbyname.\n");
+        fflush(stdout);
+
         perror("gethostbyname");
+
         return (-1);
     }
-
+    else{
+    printf("after gethostbyname\n");}
+    fflush(stdout);
     struct sockaddr_in s_a;
     bzero((char *) &s_a, sizeof (s_a));
     bcopy(s_h->h_addr, (char *) &s_a.sin_addr, s_h->h_length);
     s_a.sin_family = htonl(s_h->h_addrtype);
     s_a.sin_port = htons(portId);
     perror("test erreur before sendto: "); ///////////////////////////////////////////////////////////////
+    fflush(stdout);
 
     int nbeff;
     if ((nbeff = sendto(sock, &myMessage, sizeof (Type_Message), 0, (struct sockaddr *) &s_a, sizeof (s_a))) == -1) {
