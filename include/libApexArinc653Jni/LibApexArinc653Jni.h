@@ -37,7 +37,7 @@ JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_sendQueuingMes
  * Signature: (ILlibapexarinc653jni/TypeMessage;)I
  */
 JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_receiveQueuingMessage
-  (JNIEnv *, jobject, jint, jobject);
+  (JNIEnv *, jobject, jint, jstring, jint, jstring);
 
 #ifdef __cplusplus
 }

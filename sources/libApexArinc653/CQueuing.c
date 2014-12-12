@@ -56,7 +56,9 @@ int RECEIVE_QUEUING_MESSAGE(int sock, Type_Message *rMessage) {
 
     FD_ZERO(&readfds);
     FD_SET(sock, &readfds);
-
+    
+    printf("<Queuing/R> c_a before = %d", c_a.sin_port);
+    
     if ((ret = select(getdtablesize(), &readfds, NULL, NULL, &timeout)) == -1) {
         printf("<Queuing/R> Problem with select.\n");
         perror("select()");
@@ -66,15 +68,19 @@ int RECEIVE_QUEUING_MESSAGE(int sock, Type_Message *rMessage) {
             //std::cout<<"<Queuing/R> Detection of something at socket " << sock << "..."<<std::endl;
             lc_a = sizeof (c_a);
             if ((le_t = recvfrom(sock, rMessage, sizeof (Type_Message), 0, (struct sockaddr *) &c_a, (socklen_t *) & lc_a)) == -1) {
+                
                 printf("<Queuing/R> Cannot read message at socket %d. (recvfrom)\n",sock);
                 perror("recvfrom");
                 close(sock);
                 return (le_t); // return code are the same as recvfrom : -1 if error, or 0 if the sender has made an ordernly shutdown:  to do : implement the erno code or verify that it is correct
             }
+            printf("<Queuing/R> c_a after = %d", c_a.sin_port);
+            fflush(stdout);
    //         myReceivedMessage = *rMessage;
             //std::cout<<"<Queuing/R> Message received."<<std::endl;
             return (le_t); // return the size of the recived message
         } else {
+            printf("<Queuing/R> c_a toto = %d", c_a.sin_port);
             //std::cout<<"<Queuing/R> No detection at socket " << sock << "."<<std::endl;	
             return (0); //no detection
         }

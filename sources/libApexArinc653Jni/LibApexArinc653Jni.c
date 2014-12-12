@@ -48,27 +48,51 @@ JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_sendQueuingMes
 }
 
 JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_receiveQueuingMessage
-  (JNIEnv *env, jobject obj, jint jSock, jobject jRMessage) {
+  (JNIEnv *env, jobject obj, jint jSock, jstring jSender, jint jLength, jstring jMessage) {
     Type_Message *rMessage = (Type_Message*)malloc(sizeof(Type_Message));
     int sock = jSock;
-    int toReturn;
+    int toReturn = 0;
     toReturn = RECEIVE_QUEUING_MESSAGE(sock, rMessage);
     
+/*
     // Getting TypeMessage class and methods
     jclass cTypeMessage = env->FindClass("TypeMessage");
     jmethodID setSender =  env->GetMethodID(cTypeMessage, "setSender", "(Ljava/lang/String;)V");
     jmethodID setLength =  env->GetMethodID(cTypeMessage, "setLength", "(I)V");
     jmethodID setMessage =  env->GetMethodID(cTypeMessage, "setMessage", "(Ljava/lang/String;)V");
+*/
+    
+    printf("\n+++ Sender = %s", rMessage->m_sender);
+    fflush(stdout);
+    printf("\n+++ Length = %d",rMessage->m_length);
+    fflush(stdout);
+    printf("\n+++ Message = %s",rMessage->m_message);
+    fflush(stdout);
+
     
     // Creating jobjects for filling jRMessage
+    const char *titi;
+    sprintf(rMessage->m_sender, titi);
+    jstring sender = env->NewStringUTF(titi);
+    jint length = 50;
+    jstring msg = env->NewStringUTF("blabla");
+    
+/*
     jstring sender = env->NewStringUTF(rMessage->m_sender);
     jint length = rMessage->m_length;
     jstring msg = env->NewStringUTF(rMessage->m_message);
-    
+*/
+
+    // Sending objects to java
+    jSender = sender;
+    jLength = length;
+    jMessage = msg;
+/*
     //Filling jRMessage
     env->CallVoidMethod(jRMessage, setSender, sender);
     env->CallVoidMethod(jRMessage, setLength, length);
     env->CallVoidMethod(jRMessage, setMessage, msg);
+*/
     return toReturn;
 }
 

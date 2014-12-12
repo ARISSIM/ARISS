@@ -9,13 +9,14 @@
 #include <stdio.h>
 
 int WRITE_SAMPLING_MESSAGE(char *name, int portId, int sock, char *emetteur, char *message) {
+    printf("<Sampling/W> Entering Write\n");
     Type_Message myMessage;
     const char *str1 = message; //convert char to const char
     strcpy(myMessage.m_message, str1);
     myMessage.m_length = sizeof (myMessage.m_message);
     const char *str2 = emetteur;
     strcpy(myMessage.m_sender, str2);
-
+printf("<Sampling/W> Entering Write 2\n");
     struct hostent *s_h;
     if ((s_h = gethostbyname(name)) == NULL) {
         printf("<Sampling/W> Problem with gethostbyname.\n");
@@ -37,12 +38,12 @@ int WRITE_SAMPLING_MESSAGE(char *name, int portId, int sock, char *emetteur, cha
         return (-1);
     }
 
-    //std::cout<<"<Sampling/W> Message sended."<<std::endl;
+    printf("<Sampling/W> Message sended.\n");
     return (0);
 }
 
 int READ_SAMPLING_MESSAGE(int sock, Type_Message *rMessage) {
-
+printf("<Sampling/R> Entering read.\n");
     struct sockaddr_in c_a;
     int lc_a; //longueur structure
     fd_set readfds;
@@ -82,7 +83,7 @@ int READ_SAMPLING_MESSAGE(int sock, Type_Message *rMessage) {
             } else {
                 last_message_in_queue = 1;
                 *rMessage = rcvMsg;
-                //std::cout<<"<Sampling/R> Message received."<<std::endl;	
+                printf("<Sampling/R> Message received.\n");
                 return (le_t); // return the size of the recived message
             }
         }

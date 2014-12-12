@@ -19,7 +19,9 @@ int main(int argc, char *argv[]) {
     int portID;
     int sock;
     vector_get(&(myCvector.vqueuing_port), 0, &portID);
+    std::cout << "QueingPort : " << portID << std::endl;
     vector_get(&(myCvector.vqueuing_socket), 0, &sock);
+    std::cout << "Queuing socket : " << sock << std::endl;
     //    CQueuing Qservice;
 
     int ifmessage = 0;
@@ -30,11 +32,13 @@ int main(int argc, char *argv[]) {
         ifmessage = RECEIVE_QUEUING_MESSAGE(sock, &rMessage);
         if (ifmessage > 0) {
             std::cout << "			" << std::endl;
-            std::cout << "Message from: " << rMessage.m_sender << " Length: " << rMessage.m_length << std::endl;
-            std::cout << "Message: " << rMessage.m_message << std::endl;
+            std::cout << "<<< Receiving message from: " << rMessage.m_sender << " - Length: " << rMessage.m_length << std::endl;
+            std::cout << "<<< Message: " << rMessage.m_message << std::endl;
         }
         
         sprintf(sMessage, "Message sent from Partition2 number: %d", j);
+        std::cout << "			" << std::endl;
+        std::cout << ">>> Sending message: " << sMessage << std::endl;
         SEND_QUEUING_MESSAGE(argv[0], portID, sock, myCvector.emetteur, rMessage.m_message);
         j++;
     }

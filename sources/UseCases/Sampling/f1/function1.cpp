@@ -31,9 +31,9 @@ int main(int argc, char *argv[]) {
         std::cout << "			" << std::endl;
         std::cout << ">>> Sending message: " << sMessage << std::endl;
         WRITE_SAMPLING_MESSAGE(argv[0], samp_port, samp_socket, myCvector.emetteur, sMessage);
-
+std::cout << "TOTO" << std::endl;
         ret = READ_SAMPLING_MESSAGE(samp_socket, rMessage);
-
+std::cout << "TITI" << std::endl;
         if (ret > 0) {
             std::cout << "			" << std::endl;
             std::cout << "<<< Receiving message from: " << rMessage->m_sender << " - Length: " << rMessage->m_length << std::endl;
