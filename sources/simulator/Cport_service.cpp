@@ -34,8 +34,10 @@ int Cport_service::CREATE_QUEUING_PORT(int portID, int portName, int maxMessage_
     //	sa.sin_port = ntohl(portID);
     sa.sin_port = htons(portID);
     //	sa.sin_port = ntohs(portID);
-    //socket creation, non-connected, UDP type (DataGram)
-    if ((sock = socket(AF_INET, SOCK_DGRAM|SOCK_NONBLOCK, 0)) < 0) {
+    //    //socket creation, non-connected, UDP type (DataGram) non blocking
+    //    if ((sock = socket(AF_INET, SOCK_DGRAM|SOCK_NONBLOCK, 0)) < 0) {
+    //socket creation, non-connected, UDP type (DataGram) 
+    if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
         perror("create socket");
         close(sock);
     }
@@ -69,8 +71,10 @@ int Cport_service::CREATE_SAMPLING_PORT(int portID, int portName, int maxMessage
     sa.sin_port = htons(portID);
     //	sa.sin_port = ntohs(portID);	
 
-    //socket creation, non-connected, UDP type (DataGram)
-    if ((sock = socket(AF_INET, SOCK_DGRAM|SOCK_NONBLOCK, 0)) < 0) {
+    //    //socket creation, non-connected, UDP type (DataGram) non blocking
+    //    if ((sock = socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0)) < 0) {
+    //socket creation, non-connected, UDP type (DataGram) non blocking
+    if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
         perror("create socket");
         close(sock);
     }

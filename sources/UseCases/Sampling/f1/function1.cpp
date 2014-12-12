@@ -2,6 +2,8 @@
 #include <iostream>
 
 int main(int argc, char *argv[]) {
+    char* name_machine = argv[0];
+
     int redemarrage = atoi(argv[7]);
     int position = atoi(argv[6]);
     GUI_ARINC_partition("Partition1", position, redemarrage);
@@ -31,30 +33,21 @@ int main(int argc, char *argv[]) {
 
     for (;;) {
 
-        sprintf(sMessage, "message envoye depuis f1 numero %d", i);
+        sprintf(sMessage, "message envoye depuis Part1 numero %d", i);
         std::cout << "			" << std::endl;
         std::cout << ">>> Sending message: " << sMessage << std::endl;
-        std::cout << "before write" << std::endl; /////////////////////////////////////////////////////////////
-        std::cout << argv[0]<< samp_port<< samp_socket<< myCvector.emetteur<< sMessage<<std::endl;
-
-        ret = WRITE_SAMPLING_MESSAGE(argv[0], samp_port, samp_socket, myCvector.emetteur, sMessage);
-        std::cout << "after write" << std::endl; /////////////////////////////////////////////////////////////
+        ret = WRITE_SAMPLING_MESSAGE(name_machine, samp_port, samp_socket, myCvector.emetteur, sMessage);
 
         if (ret == -1) {
             perror("WRITE_SAMPLING_MESSAGE : ");
         }
 
-        std::cout << "before read" << std::endl; /////////////////////////////////////////////////////////////
 
         ret = READ_SAMPLING_MESSAGE(samp_socket, rMessage);
-        std::cout << "after read" << std::endl; /////////////////////////////////////////////////////////////
 
-        std::cout << "TITI" << std::endl;
-        if (ret < 0) {
-            perror("error on recvfrom : ");
-        } else if (ret > 0) {
+        if (ret > 0) {
             std::cout << "			" << std::endl;
-            std::cout << "<<< Receiving message from: " << rMessage->m_sender << " - Length: " << rMessage->m_length << std::endl;
+            //std::cout << "<<< Receiving message from: " << rMessage->m_sender << " - Length: " << rMessage->m_length << std::endl;
             std::cout << "<<< Message: " << rMessage->m_message << std::endl;
         } else {
             std::cout << "			" << std::endl;
@@ -62,7 +55,7 @@ int main(int argc, char *argv[]) {
         }
 
         i++;
-        usleep(10000);
+        sleep(1);
     }
 
 }

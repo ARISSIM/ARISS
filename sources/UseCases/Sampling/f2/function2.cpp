@@ -2,6 +2,7 @@
 #include <iostream>
 
 int main(int argc, char *argv[]) {
+    char* name_machine = argv[0];
     int redemarrage = atoi(argv[7]);
     int position = atoi(argv[6]);
     GUI_ARINC_partition("Partition2", position, redemarrage);
@@ -31,22 +32,17 @@ int main(int argc, char *argv[]) {
 
     for (;;) {
 
-        sprintf(sMessage, "message envoye depuis f2 numero %d", i);
+        sprintf(sMessage, "Partition 2 numero %d", i);
         std::cout << "			" << std::endl;
         std::cout << ">>> Sending message: " << sMessage << std::endl;
 
-        std::cout << "before write" << std::endl; /////////////////////////////////////////////////////////////
-        std::cout << argv[0]<< samp_port<< samp_socket<< myCvector.emetteur<< sMessage<<std::endl;
-        WRITE_SAMPLING_MESSAGE(argv[0], samp_port, samp_socket, myCvector.emetteur, sMessage);
-        std::cout << "after write" << std::endl; /////////////////////////////////////////////////////////////
-        std::cout << "before read" << std::endl; /////////////////////////////////////////////////////////////
+        WRITE_SAMPLING_MESSAGE(name_machine, samp_port, samp_socket, myCvector.emetteur, sMessage);
 
         ret = READ_SAMPLING_MESSAGE(samp_socket, rMessage);
-        std::cout << "after read" << std::endl; /////////////////////////////////////////////////////////////
 
         if (ret > 0) {
             std::cout << "			" << std::endl;
-            std::cout << "<<< Receiving message from: " << rMessage->m_sender << " - Length: " << rMessage->m_length << std::endl;
+           // std::cout << "<<< Receiving message from: " << rMessage->m_sender << " - Length: " << rMessage->m_length << std::endl;
             std::cout << "<<< Message: " << rMessage->m_message << std::endl;
         } else {
             std::cout << "			" << std::endl;
@@ -54,7 +50,8 @@ int main(int argc, char *argv[]) {
         }
 
         i++;
-        usleep(10000);
+        sleep(2);
+
     }
 
 
