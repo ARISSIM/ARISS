@@ -112,7 +112,7 @@ void CManager::f_thread_watchdog(pid_t *pid_found) {
     while (1) {
         pid_t pid_test = waitpid((pid_t) - 1, &stat, 0);
         *pid_found = pid_test;
-        std::cout << "Dead partition detected" << std::endl;
+        //std::cout << "Dead partition detected" << std::endl;
     }
 }
 
@@ -353,63 +353,63 @@ void CManager::create_part() {
 
     std::cout << "********** Scheduling loop**********" << std::endl;
     while (1) {
-        if (pid_result != 0) {
-            pid_intermediaire = pid_result;
-            pid_result = 0;
-            for (unsigned int partitionNumber = 0; partitionNumber < m_vpart.size(); partitionNumber++) {
-                if (pid_intermediaire == prec[partitionNumber]) {
-                    g = partitionNumber;
-                }
-
-            }
-            std::cout << "L'arret du Master a ete detecte... redemarrage..." << std::endl;
-            //			
-            //                if((pid=fork())==0)
-            //                        {
-            //                        //child
-            //				
-            //                        std::cout<<"IM the child and my PID is "<<(int) getpid()<<std::endl;
-            //                        std::cout<<"partition "<<g<<std::endl;
-            //                        std::cout<<"path to binary "<<partitionTable[g]<<std::endl;	
-            //                        sleep(1);
-            //                        char interm[3];
-            //                        sprintf(interm,"%d",g);
-            //                        const char* argument5=interm;
-            //                        const char* argument6[2]={"1"};
-            //                        if(g==0){
-            //                                if(arg_id_partition_master.compare("p")){
-            //                                        arg_id_partition_master="b";
-            //                                        arg_id_partition=arg_id_partition_master;			
-            //                                }
-            //                                }
-            //                        else if(g==1){	
-            //                                if(arg_id_partition_slave.compare("p")){
-            //                                        arg_id_partition_slave="b";
-            //                                        arg_id_partition=arg_id_partition_slave;			
-            //                                }
-            //
-            //                                }		
-            //                        ret=execlp(partitionTable[g],arg,(arg1[g]).c_str(),(arg2[g]).c_str(),(arg3[g]).c_str(),(arg4[g]).c_str(),arg_id_partition.c_str(),argument5,argument6,NULL);
-            //					
-            //                        if (ret==-1)
-            //                        perror(" exec ");			
-            //                        exit(0);
-            //				
-            //                        }
-            prec[g] = pid;
-            part_pid[g] = pid;
-            std::cout << "IM the godfather and my PID is " << (int) getpid() << std::endl;
-            std::cout << "I've created " << prec[g] << std::endl;
-            pid_intermediaire = 0;
-            g = 0;
-        }
+//        if (pid_result != 0) {
+//            pid_intermediaire = pid_result;
+//            pid_result = 0;
+//            for (unsigned int partitionNumber = 0; partitionNumber < m_vpart.size(); partitionNumber++) {
+//                if (pid_intermediaire == prec[partitionNumber]) {
+//                    g = partitionNumber;
+//                }
+//
+//            }
+//            //std::cout << "L'arret du Master a ete detecte... redemarrage..." << std::endl;
+//            //			
+//            //                if((pid=fork())==0)
+//            //                        {
+//            //                        //child
+//            //				
+//            //                        std::cout<<"IM the child and my PID is "<<(int) getpid()<<std::endl;
+//            //                        std::cout<<"partition "<<g<<std::endl;
+//            //                        std::cout<<"path to binary "<<partitionTable[g]<<std::endl;	
+//            //                        sleep(1);
+//            //                        char interm[3];
+//            //                        sprintf(interm,"%d",g);
+//            //                        const char* argument5=interm;
+//            //                        const char* argument6[2]={"1"};
+//            //                        if(g==0){
+//            //                                if(arg_id_partition_master.compare("p")){
+//            //                                        arg_id_partition_master="b";
+//            //                                        arg_id_partition=arg_id_partition_master;			
+//            //                                }
+//            //                                }
+//            //                        else if(g==1){	
+//            //                                if(arg_id_partition_slave.compare("p")){
+//            //                                        arg_id_partition_slave="b";
+//            //                                        arg_id_partition=arg_id_partition_slave;			
+//            //                                }
+//            //
+//            //                                }		
+//            //                        ret=execlp(partitionTable[g],arg,(arg1[g]).c_str(),(arg2[g]).c_str(),(arg3[g]).c_str(),(arg4[g]).c_str(),arg_id_partition.c_str(),argument5,argument6,NULL);
+//            //					
+//            //                        if (ret==-1)
+//            //                        perror(" exec ");			
+//            //                        exit(0);
+//            //				
+//            //                        }
+//            prec[g] = pid;
+//            part_pid[g] = pid;
+//            std::cout << "IM the godfather and my PID is " << (int) getpid() << std::endl;
+//            std::cout << "I've created " << prec[g] << std::endl;
+//            pid_intermediaire = 0;
+//            g = 0;
+//        }
         for (unsigned int i = 0; i < m_vpart.size(); i++) {
-            //std::cout<<" **ACTIVATION PARTITION "<<i+1<<std::endl;
+            std::cout << " **ACTIVATION PARTITION " << i + 1 << std::endl;
             kill(part_pid[i], SIGCONT); //réveille partition i
             //gettimeofday(&time1, NULL);
 
             usleep(vtimeTable[i]); //budget temps p1 // ordonnanceur s'endort
-            //std::cout<<" **ARRET PARTITION"<<i+1<<std::endl;
+            std::cout << " **ARRET PARTITION" << i + 1 << std::endl;
             kill(part_pid[i], SIGSTOP); // suspend la partition i
 
             //gettimeofday(&time2, NULL);

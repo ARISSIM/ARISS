@@ -25,26 +25,38 @@ int main(int argc, char *argv[]) {
     char sMessage[256];
     i = 0;
     int ret = 0;
+    std::cout << "samp_port : " << samp_port << std::endl; /////////////////////////////////////////////////////////////
+    std::cout << "samp_socket : " << samp_socket << std::endl; /////////////////////////////////////////////////////////////
+
+
     for (;;) {
-        
+
         sprintf(sMessage, "message envoye depuis f1 numero %d", i);
         std::cout << "			" << std::endl;
         std::cout << ">>> Sending message: " << sMessage << std::endl;
-        WRITE_SAMPLING_MESSAGE(argv[0], samp_port, samp_socket, myCvector.emetteur, sMessage);
-std::cout << "TOTO" << std::endl;
+        ret = WRITE_SAMPLING_MESSAGE(argv[0], samp_port, samp_socket, myCvector.emetteur, sMessage);
+        if (ret == -1) {
+            perror("WRITE_SAMPLING_MESSAGE : ");
+        }
+
+        std::cout << "TOTO" << std::endl; /////////////////////////////////////////////////////////////
+
         ret = READ_SAMPLING_MESSAGE(samp_socket, rMessage);
-std::cout << "TITI" << std::endl;
-        if (ret > 0) {
+
+        std::cout << "TITI" << std::endl;
+        if (ret < 0) {
+            perror("error on recvfrom : ");
+        } else if (ret > 0) {
             std::cout << "			" << std::endl;
             std::cout << "<<< Receiving message from: " << rMessage->m_sender << " - Length: " << rMessage->m_length << std::endl;
             std::cout << "<<< Message: " << rMessage->m_message << std::endl;
-        }else{
+        } else {
             std::cout << "			" << std::endl;
             std::cout << "<<< No new message" << std::endl;
         }
-        
+
         i++;
-        sleep(1);
+        usleep(10000);
     }
 
 }

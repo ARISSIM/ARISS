@@ -25,8 +25,12 @@ int main(int argc, char *argv[]) {
     char sMessage[256];
     i = 0;
     int ret = 0;
+
+    std::cout << "samp_port : " << samp_port << std::endl; /////////////////////////////////////////////////////////////
+    std::cout << "samp_socket : " << samp_socket << std::endl; /////////////////////////////////////////////////////////////
+
     for (;;) {
-        
+
         sprintf(sMessage, "message envoye depuis f2 numero %d", i);
         std::cout << "			" << std::endl;
         std::cout << ">>> Sending message: " << sMessage << std::endl;
@@ -38,13 +42,13 @@ int main(int argc, char *argv[]) {
             std::cout << "			" << std::endl;
             std::cout << "<<< Receiving message from: " << rMessage->m_sender << " - Length: " << rMessage->m_length << std::endl;
             std::cout << "<<< Message: " << rMessage->m_message << std::endl;
-        }else{
+        } else {
             std::cout << "			" << std::endl;
             std::cout << "<<< No new message" << std::endl;
         }
-        
+
         i++;
-        sleep(1);
+        usleep(10000);
     }
 
 

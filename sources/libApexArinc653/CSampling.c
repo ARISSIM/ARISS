@@ -9,14 +9,13 @@
 #include <stdio.h>
 
 int WRITE_SAMPLING_MESSAGE(char *name, int portId, int sock, char *emetteur, char *message) {
-    printf("<Sampling/W> Entering Write\n");
+    printf("<Sampling/W> Entering Write\n"); ///////////////////////////////////////////////////    
+    const char *str1 = message; //convert char to const char    
     Type_Message myMessage;
-    const char *str1 = message; //convert char to const char
     strcpy(myMessage.m_message, str1);
     myMessage.m_length = sizeof (myMessage.m_message);
     const char *str2 = emetteur;
     strcpy(myMessage.m_sender, str2);
-printf("<Sampling/W> Entering Write 2\n");
     struct hostent *s_h;
     if ((s_h = gethostbyname(name)) == NULL) {
         printf("<Sampling/W> Problem with gethostbyname.\n");
@@ -29,6 +28,7 @@ printf("<Sampling/W> Entering Write 2\n");
     bcopy(s_h->h_addr, (char *) &s_a.sin_addr, s_h->h_length);
     s_a.sin_family = htonl(s_h->h_addrtype);
     s_a.sin_port = htons(portId);
+    perror("test erreur before sendto: "); ///////////////////////////////////////////////////////////////
 
     int nbeff;
     if ((nbeff = sendto(sock, &myMessage, sizeof (Type_Message), 0, (struct sockaddr *) &s_a, sizeof (s_a))) == -1) {
@@ -37,13 +37,14 @@ printf("<Sampling/W> Entering Write 2\n");
         close(sock);
         return (-1);
     }
+    perror("test erreur after sendto: "); ///////////////////////////////////////////////////////////////
 
-    printf("<Sampling/W> Message sended.\n");
+    printf("<Sampling/W> Message sended.\n"); ///////////////////////////////////////////////////
     return (0);
 }
 
 int READ_SAMPLING_MESSAGE(int sock, Type_Message *rMessage) {
-printf("<Sampling/R> Entering read.\n");
+    printf("<Sampling/R> Entering read.\n"); ///////////////////////////////////////////////
     struct sockaddr_in c_a;
     int lc_a; //longueur structure
     fd_set readfds;
@@ -90,4 +91,3 @@ printf("<Sampling/R> Entering read.\n");
     }
     return 0;
 }
-
