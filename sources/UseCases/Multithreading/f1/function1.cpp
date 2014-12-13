@@ -1,4 +1,6 @@
-#include "include/CBasefunction.h"
+#include "CBasefunction.h"
+#include <iostream>
+#include <stdlib.h>
 
 #define SEMKEY_1 50000
 
@@ -7,8 +9,15 @@
 static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void * fonction_thread(void * arg) {
+    std::cout << "Begining thread " << std::endl;
+    std::cout << "arg vaut : " << arg << std::endl;
+
     int numero = *((int*) (&arg));
-    usleep(10000 * numero);
+    std::cout << "numéro vaut : " << numero << std::endl;
+
+    //usleep(random());
+    std::cout << "Before while " << std::endl;
+
     while (1) {
         fprintf(stderr, "[%d] demande le mutexn\n", numero);
         if (numero != 2)
@@ -20,8 +29,11 @@ void * fonction_thread(void * arg) {
         sleep(1);
         fprintf(stderr, "[%d] lache le mutexn\n", numero);
         pthread_mutex_unlock(& mutex);
-        usleep(10000);
+        usleep(100);
     }
+    std::cout << "exit thread " << std::endl;
+
+
     return NULL;
 }
 
@@ -47,12 +59,14 @@ int main(int argc, char *argv[]) {
     pthread_attr_init(thread_attributes);
     if (pthread_create(thread_watchdogM, thread_attributes, (void*(*)(void*)) & CManager::f_thread_watchdogM, (void *) &arguments) != 0)
         perror(" Monitoring thread creation failed !");
-*/
+     */
 
 
     pthread_mutex_lock(& mutex);
     for (i = 0; i < NB_THREADS; i++) {
-        int argument =  i + 1;
+        int argument = i + 1;
+        std::cout << "argument vaut : " << argument << std::endl;
+
         pthread_create(& thread[i], NULL, fonction_thread, (void *) &argument);
         usleep(10000);
     }
