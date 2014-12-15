@@ -34,6 +34,8 @@ int main(int argc, char *argv[]) {
             std::cout << "			" << std::endl;
             std::cout << "<<< Receiving message from: " << rMessage.m_sender << " - Length: " << rMessage.m_length << std::endl;
             std::cout << "<<< Message: " << rMessage.m_message << std::endl;
+        }else{
+            std::cout << "<<< No new message. " << std::endl;
         }
         
         sprintf(sMessage, "Message sent from Partition2 number: %d", j);
@@ -41,6 +43,7 @@ int main(int argc, char *argv[]) {
         std::cout << ">>> Sending message: " << sMessage << std::endl;
         SEND_QUEUING_MESSAGE(argv[0], portID, sock, myCvector.emetteur, rMessage.m_message);
         j++;
+        sleep(2);
     }
     return 0;
 }
