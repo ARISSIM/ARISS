@@ -76,6 +76,5 @@ int READ_SAMPLING_MESSAGE(int sock, Type_Message *rMessage) {
         }
 
     } while (last_message_in_queue != 1);
-    printf("arrrrrrrrrg");
     return 0;
 }
