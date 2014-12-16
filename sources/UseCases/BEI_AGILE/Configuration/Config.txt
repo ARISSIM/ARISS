@@ -1,0 +1,12 @@
+% Test file process config
+%partition name
+%path process
+%time processing
+%number of sampling ports
+%number of queuing ports
+%ports number 
+% Il ne doit pas y avoir d espace en plus !!
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+Capteur ./Capteur/capteur.out 300000
+Primary ./Primary/primary.out 800000
+Backup ./Backup/backup.out 800000

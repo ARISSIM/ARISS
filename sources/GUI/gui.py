@@ -101,12 +101,12 @@ class gui_for_ARINC_653(Tk):
 		st.config(foreground='Black')
 		#on configure le fond du 'texte derouant'
 		
-		if ((sys.argv[3] == "Master") or (sys.argv[3] == "Partition1")):
+		if ((sys.argv[3] == "Master") or (sys.argv[3] == "Partition1")or (sys.argv[3] == "Primary")):
 			st.config(background='LightYellow')
-		elif ((sys.argv[3] =="Slave") or (sys.argv[3] == "Partition2")):
+		elif ((sys.argv[3] =="Slave") or (sys.argv[3] == "Partition2")or (sys.argv[3] == "Backup")):
 			st.config(background='LightGreen')
 		#e = Entry(st,width=25)
-		elif ((sys.argv[3] =="Leica") or (sys.argv[3] == "Partition3")):
+		elif ((sys.argv[3] =="Leica") or (sys.argv[3] == "Partition3")or (sys.argv[3] == "Capteur")):
 		        st.config(background='misty rose')
 		else: 
 		        st.config(background='PeachPuff')

@@ -12,6 +12,9 @@ d		:= $(dir)
 #dir    := $(d)/Chaire_SE_Student
 #include        $(dir)/rules.mk
 
+dir    := $(d)/BEI_AGILE
+include        $(dir)/rules.mk
+
 dir	:= $(d)/JNI_Template
 include	$(dir)/rules.mk
 
