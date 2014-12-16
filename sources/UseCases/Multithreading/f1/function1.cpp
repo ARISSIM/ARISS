@@ -9,10 +9,8 @@
 static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void * fonction_thread(void * arg) {
-    std::cout << "Begining thread " << std::endl;
-    std::cout << "arg vaut : " << arg << std::endl;
 
-    int numero = *((int*) (&arg));
+    long numero = (long) arg;
     std::cout << "numéro vaut : " << numero << std::endl;
 
     //usleep(random());
@@ -45,29 +43,15 @@ int main(int argc, char *argv[]) {
     int redemarrage = atoi(argv[7]);
     int position = atoi(argv[6]);
     GUI_ARINC_partition("Partition1", position, redemarrage);
-    int i;
+    long i;
     pthread_t thread[NB_THREADS];
-
-
-
-    /*pid_to_send = prec[partitionNumber];
-    arguments.pid_to_watch = &pid_to_send;
-    arguments.myCManager = this;
-    arguments.pid_result = &pid_result;
-    thread_attributes = (pthread_attr_t *) malloc(sizeof (pthread_attr_t));
-    thread_watchdogM = (pthread_t *) malloc(sizeof (pthread_t));
-    pthread_attr_init(thread_attributes);
-    if (pthread_create(thread_watchdogM, thread_attributes, (void*(*)(void*)) & CManager::f_thread_watchdogM, (void *) &arguments) != 0)
-        perror(" Monitoring thread creation failed !");
-     */
-
 
     pthread_mutex_lock(& mutex);
     for (i = 0; i < NB_THREADS; i++) {
-        int argument = i + 1;
+        long argument = i + 1;
         std::cout << "argument vaut : " << argument << std::endl;
 
-        pthread_create(& thread[i], NULL, fonction_thread, (void *) &argument);
+        pthread_create(& thread[i], NULL, fonction_thread, (void *) argument);
         usleep(10000);
     }
     sleep(1);
