@@ -21,7 +21,7 @@ JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_writeSamplingM
  * Signature: (ILlibapexarinc653jni/TypeMessage;)I
  */
 JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_readSamplingMessage
-  (JNIEnv *, jobject, jint, jobject);
+  (JNIEnv *, jobject, jint, jstring, jint, jstring);
 
 /*
  * Class:     libapexarinc653jni_LibApexArinc653Jni
