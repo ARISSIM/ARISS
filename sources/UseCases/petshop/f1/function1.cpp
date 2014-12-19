@@ -32,15 +32,23 @@ int main(int argc, char *argv[]) {
     myCvector = init_communication(arg, NULL);
 
     std::string name = argv[0];
-    int portID;
-    int sock;
-    vector_get(&(myCvector.vqueuing_port), 0, &portID);
-    std::cout << "QueingPort : " << portID << std::endl;
-    vector_get(&(myCvector.vqueuing_socket), 0, &sock);
-    std::cout << "Queuing socket : " << sock << std::endl;
     std::string emetteur = myCvector.emetteur;
-
-    std::string petshopArg = "\"" + name + " " + intToString(portID) + " " + intToString(sock) + " " + emetteur + "\"";
+    
+    int queuingPortID;
+    int queuingSock;
+    vector_get(&(myCvector.vqueuing_port), 0, &queuingPortID);
+    std::cout << "QueingPort : " << queuingPortID << std::endl;
+    vector_get(&(myCvector.vqueuing_socket), 0, &queuingSock);
+    std::cout << "Queuing socket : " << queuingSock << std::endl;
+    
+    int samplingPortID;
+    int samplingSock;
+    vector_get(&(myCvector.vsamp_port), 0, &samplingPortID);
+    std::cout << "Sampling port: " << samplingPortID << std::endl;
+    vector_get(&(myCvector.vsamp_socket), 0, &samplingSock);
+    std::cout << "Sampling socket : " << samplingSock << std::endl;
+    
+    std::string petshopArg = "\"" + name + " " + emetteur  + " " + intToString(queuingPortID) + " " + intToString(queuingSock) + " " + intToString(samplingPortID) + " " + intToString(samplingSock) + "\"";
 
     std::string argument[20];
     argument[0] = "/usr/lib/jvm/java-8-oracle/bin/java";

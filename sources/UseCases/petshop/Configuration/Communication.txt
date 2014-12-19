@@ -4,5 +4,7 @@
 % C(2) partition qui reçoit
 % C(3) sampling ou queuing
 % C(4) numero du port dans lequel ecrire
-1 2 Q 9001
-2 1 Q 9002
+1 2 Q 45630
+2 1 Q 45640
+1 2 S 45650
+2 1 S 45660
