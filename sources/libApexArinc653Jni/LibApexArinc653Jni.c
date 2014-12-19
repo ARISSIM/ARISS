@@ -17,11 +17,18 @@ JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_writeSamplingM
 }
 
 JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_readSamplingMessage
-  (JNIEnv *env, jobject obj, jint jSock, jobject jRMessage){
+  (JNIEnv *env, jobject obj, jint jSock, jstring jSender, jint jLength, jstring jMessage){
     Type_Message *rMessage = (Type_Message*)malloc(sizeof(Type_Message));
     int sock = jSock;
     int toReturn;
     toReturn = READ_SAMPLING_MESSAGE(sock, rMessage);
+    printf("\n+++ SamplingSender = %s", rMessage->m_sender);
+    fflush(stdout);
+    printf("\n+++ SamplingLength = %d",rMessage->m_length);
+    fflush(stdout);
+    printf("\n+++ SamplingMessage = %s",rMessage->m_message);
+    fflush(stdout);
+/*
     jclass cTypeMessage = env->FindClass("TypeMessage");
     jmethodID setSender =  env->GetMethodID(cTypeMessage, "setSender", "(Ljava/lang/String;)V");
     jmethodID setLength =  env->GetMethodID(cTypeMessage, "setLength", "(I)V");
@@ -32,6 +39,7 @@ JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_readSamplingMe
     env->CallVoidMethod(jRMessage, setSender, sender);
     env->CallVoidMethod(jRMessage, setLength, length);
     env->CallVoidMethod(jRMessage, setMessage, msg);
+*/
     return toReturn;
 }
 
@@ -62,11 +70,11 @@ JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_receiveQueuing
     jmethodID setMessage =  env->GetMethodID(cTypeMessage, "setMessage", "(Ljava/lang/String;)V");
 */
     
-    printf("\n+++ Sender = %s", rMessage->m_sender);
+    printf("\n+++ QueuingSender = %s", rMessage->m_sender);
     fflush(stdout);
-    printf("\n+++ Length = %d",rMessage->m_length);
+    printf("\n+++ QueuingLength = %d",rMessage->m_length);
     fflush(stdout);
-    printf("\n+++ Message = %s",rMessage->m_message);
+    printf("\n+++ QueuingMessage = %s",rMessage->m_message);
     fflush(stdout);
 
     
