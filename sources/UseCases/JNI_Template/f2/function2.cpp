@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
     int ifmessage = 0;
 
     for (;;) {
-        std::cout << "debur boucle for, vqueuing_socket[0] : " << sock << std::endl;
+       // std::cout << "debur boucle for, vqueuing_socket[0] : " << sock << std::endl;
 
         ifmessage = RECEIVE_QUEUING_MESSAGE(sock, &rMessage);
         if (ifmessage > 0) {
@@ -38,7 +38,10 @@ int main(int argc, char *argv[]) {
             std::cout << "total length " << sizeof (rMessage) << std::endl;
             std::cout << "receive :" << rMessage.m_message << std::endl;
             std::cout << "			" << std::endl;
+        }else{
+            std::cout << "No new queuing message" << std::endl;
         }
+        sleep(1);
 
     }
     return 0;
