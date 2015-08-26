@@ -4,7 +4,7 @@
 #include "CSampling.h"
 #include "CQueuing.h"
 
-JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_writeSamplingMessage
+JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_writeSamplingMessage
 (JNIEnv *env, jobject obj, jstring jName, jint jPortId, jint jSock, jstring jEmetteur, jstring jMessage) {
     char *name = strdup(env->GetStringUTFChars(jName, 0));
     int portId = jPortId;
@@ -16,7 +16,7 @@ JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_writeSamplingM
     return toReturn;
 }
 
-JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_readSamplingMessage
+JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_readSamplingMessage
   (JNIEnv *env, jobject obj, jint jSock, jstring jSender, jint jLength, jstring jMessage){
     Type_Message *rMessage = (Type_Message*)malloc(sizeof(Type_Message));
     int sock = jSock;
@@ -43,7 +43,9 @@ JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_readSamplingMe
     return toReturn;
 }
 
-JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_sendQueuingMessage
+//int SEND_QUEUING_MESSAGE(char *name, int portId, int sock, char *emetteur, char *message) 
+
+JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_sendQueuingMessage
 (JNIEnv *env, jobject obj, jstring jName, jint jPortId, jint jSock, jstring jEmetteur, jstring jMessage) {
     char *name = strdup(env->GetStringUTFChars(jName, 0));
     int portId = jPortId;
@@ -55,7 +57,9 @@ JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_sendQueuingMes
     return toReturn;
 }
 
-JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_receiveQueuingMessage
+//int RECEIVE_QUEUING_MESSAGE(int sock, Type_Message *rMessage) 
+
+JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_receiveQueuingMessage
   (JNIEnv *env, jobject obj, jint jSock, jstring jSender, jint jLength, jstring jMessage) {
     Type_Message *rMessage = (Type_Message*)malloc(sizeof(Type_Message));
     int sock = jSock;

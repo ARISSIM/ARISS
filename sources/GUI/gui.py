@@ -188,7 +188,7 @@ class gui_for_ARINC_653(Tk):
 		if r:
 			ChaineALire = os.read(sortieTube,256)
 			st.insert(END,ChaineALire)
-			st.see(END)
+			#st.see(END)
 
 		time.sleep(0.01)
 		self.after(10,self.readfunction) # => boucler apres 10 millisecondes
