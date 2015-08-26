@@ -365,7 +365,7 @@ void CManager::create_part() {
             }
             std::cout << "Detection of partition failure... reboot..." << std::endl;
 
-            if ((pid = fork()) == 0) {
+          /*  if ((pid = fork()) == 0) {
                 //child
 
                 std::cout << "IM the child and my PID is " << (int) getpid() << std::endl;
@@ -400,7 +400,7 @@ void CManager::create_part() {
             std::cout << "IM the godfather and my PID is " << (int) getpid() << std::endl;
             std::cout << "I've created " << prec[g] << std::endl;
             pid_intermediaire = 0;
-            g = 0;
+            g = 0;*/
         }
         for (unsigned int i = 0; i < m_vpart.size(); i++) {
 //            std::cout << " **ACTIVATION PARTITION " << i + 1 << std::endl;

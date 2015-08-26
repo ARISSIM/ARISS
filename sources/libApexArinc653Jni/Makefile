@@ -21,8 +21,9 @@ lib: $(EXEC)
 libApexArinc653Jni.so: $(OBJ)
 	@echo "  [CC]    $< -> $@"
 	@mkdir -p ../../lib
+	@echo $(CC) $(CFLAGS) -shared -o ../../lib/$@ $^ $(LDFLAGS) $(INCLUDE_DIR) $(LIBS)
 	@$(CC) $(CFLAGS) -shared -o ../../lib/$@ $^ $(LDFLAGS) $(INCLUDE_DIR) $(LIBS)
-
+	
 
 ../../build/libApexArinc653Jni/%.o: %.c
 	@echo "  [CC]    $< -> $@"
