@@ -1,4 +1,12 @@
 /*
+* To test : 
+*   1) compile TestJNI.java (command = javac TestJNI.java)
+*   2) copy TestJNI.class and LibApexArinc653Jni.class in binary/UsesCases/JNI_Template/
+*   3) copy libApexArinc653Jni.so in /usr/lib/jvm/java-8-oracle/jre/bin/
+*/
+
+
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -10,7 +18,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author ics
+ * @author Camille Fayollas
  */
 public class TestJNI {
 
