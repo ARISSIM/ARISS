@@ -29,6 +29,7 @@ int main(int argc, char *argv[]) {
     for (ifmessage=0; ifmessage < 10 ; ifmessage++){
             char sMessage[256];
             std::cout << "Sending queuing message numero " << ifmessage << std::endl;
+            sprintf(sMessage, "Message envoye depuis f2 numero %d", ifmessage);
             SEND_QUEUING_MESSAGE(argv[0], portID, sock, myCvector.emetteur, sMessage);
     }
     for (;;) {

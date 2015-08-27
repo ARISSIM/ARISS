@@ -13,11 +13,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import libapexarinc653jni.LibApexArinc653Jni;
+import libapexarinc653jni.ReturnObject;
 /**
  *
  * @author Camille Fayollas
@@ -44,9 +41,13 @@ public class TestJNI {
             System.out.println("<<<< Sendind message n° " + i + ">>>>");
             String msg = "New message n° " + i;
             LibApexArinc653Jni.pSendQueuingMessage(name, port, sock, emetteur, msg);
-            int ifMessage = LibApexArinc653Jni.pReceiveQueuingMessage(sock, emetteurR, lengthR, msgR);
-            if (ifMessage > 0){
-                System.out.println("New queuing message");
+            ReturnObject rMsg = LibApexArinc653Jni.pReceiveQueuingMessage(sock);
+            
+            if (rMsg.getReturnCode()>0){
+                System.out.println("--------------------------");
+                System.out.println("New queuing message from : " + rMsg.getSender());
+                System.out.println("Lenth : " + rMsg.getLength());
+                System.out.println("Message : " + rMsg.getMessage());
             }else{
                 System.out.println("No new message");
             }
