@@ -1,7 +1,9 @@
 make :
 	javac TestJNI.java
 	cp TestJNI.class ../../../../binary/UseCases/JNI_Template/TestJNI.class
-	cp LibApexArinc653Jni.class ../../../../binary/UseCases/JNI_Template/LibApexArinc653Jni.class 
+	cp LibApexArinc653Jni.class ../../../../binary/UseCases/JNI_Template/LibApexArinc653Jni.class
+	sudo cp ../../../../lib/libApexArinc653Jni.so /usr/lib/jvm/java-8-oracle/jre/bin/libApexArinc653Jni.so
+	sudo cp ../../../../lib/libApexArinc653.so /usr/lib/jvm/java-8-oracle/jre/bin/libApexArinc653.so
 
 
 #
