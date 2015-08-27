@@ -25,10 +25,14 @@ int main(int argc, char *argv[]) {
     //    CQueuing Qservice;
 
     int ifmessage = 0;
-
+    int cptMessage = 0;
+    for (ifmessage=0; ifmessage < 10 ; ifmessage++){
+            char sMessage[256];
+            std::cout << "Sending queuing message numero " << ifmessage << std::endl;
+            SEND_QUEUING_MESSAGE(argv[0], portID, sock, myCvector.emetteur, sMessage);
+    }
     for (;;) {
        // std::cout << "debur boucle for, vqueuing_socket[0] : " << sock << std::endl;
-
         ifmessage = RECEIVE_QUEUING_MESSAGE(sock, &rMessage);
         if (ifmessage > 0) {
             //            Qservice.Display_Message();

@@ -1,3 +1,9 @@
+make :
+	javac TestJNI.java
+	cp TestJNI.class ../../../../binary/UseCases/JNI_Template/TestJNI.class
+	cp LibApexArinc653Jni.class ../../../../binary/UseCases/JNI_Template/LibApexArinc653Jni.class 
+
+
 #
 
 ## To compile the java program and copy the .class in the right binary repository*

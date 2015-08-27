@@ -30,13 +30,26 @@ int main(int argc, char *argv[])
         std::cout << "Queuing socket : " << sock << std::endl;
         std::string emetteur = myCvector.emetteur;
         
+//        std::string argument[20];
+//        argument[0] = "/usr/lib/jvm/java-8-oracle/bin/java";
+//        argument[1] = "TestJNI"; // Class Name
+//        argument[2] = name;
+//        argument[3] = convertInt(portID);
+//        argument[4] = convertInt(sock);
+//        argument[5] = emetteur;
+//        
+//        int ret = execlp("java",argument[0],argument[1],argument[2],argument[3],argument[4],argument[5],NULL);
+//        if (ret == -1)
+//            perror("Exec : ");
+//        
+        
 //        std::string commande = "java TestJNI " + name + " " + convertInt(portID) + " " + convertInt(sock) + " " + emetteur;
         std::string sPortID = convertInt(portID);
         std::string sSock = convertInt(sock);
         std::string sClass = "TestJNI";
-        
-        std::cout << "java" <<  sClass.c_str()<<name.c_str()<<sPortID.c_str()<<sSock.c_str()<<emetteur.c_str()<< NULL <<std::endl;
-        
+//        
+//        std::cout << "java" <<  sClass.c_str()<<name.c_str()<<sPortID.c_str()<<sSock.c_str()<<emetteur.c_str()<< NULL <<std::endl;
+//        
         int ret = execlp("java", "/usr/lib/jvm/java-8-oracle/bin/java",sClass.c_str(),name.c_str(),sPortID.c_str(),sSock.c_str(),emetteur.c_str(), NULL);
         if (ret == -1)
             perror("Exec : ");
