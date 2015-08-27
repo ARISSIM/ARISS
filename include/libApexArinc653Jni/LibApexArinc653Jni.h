@@ -12,7 +12,7 @@ extern "C" {
  * Method:    writeSamplingMessage
  * Signature: (Ljava/lang/String;IILjava/lang/String;Ljava/lang/String;)I
  */
-JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_writeSamplingMessage
+JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_writeSamplingMessage
   (JNIEnv *, jobject, jstring, jint, jint, jstring, jstring);
 
 /*
@@ -20,7 +20,7 @@ JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_writeSamplingMessage
  * Method:    readSamplingMessage
  * Signature: (Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;)I
  */
-JNIEXPORT jobject JNICALL Java_LibApexArinc653Jni_readSamplingMessage
+JNIEXPORT jobject JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_readSamplingMessage
   (JNIEnv *, jobject, jint);
 
 /*
@@ -28,7 +28,7 @@ JNIEXPORT jobject JNICALL Java_LibApexArinc653Jni_readSamplingMessage
  * Method:    sendQueuingMessage
  * Signature: (Ljava/lang/String;IILjava/lang/String;Ljava/lang/String;)I
  */
-JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_sendQueuingMessage
+JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_sendQueuingMessage
   (JNIEnv *, jobject, jstring, jint, jint, jstring, jstring);
 
 /*
@@ -36,7 +36,7 @@ JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_sendQueuingMessage
  * Method:    receiveQueuingMessage
  * Signature: (I)LReturnObject;
  */
-JNIEXPORT jobject JNICALL Java_LibApexArinc653Jni_receiveQueuingMessage
+JNIEXPORT jobject JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_receiveQueuingMessage
   (JNIEnv *, jobject, jint);
 
 #ifdef __cplusplus
