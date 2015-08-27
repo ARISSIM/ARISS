@@ -3,11 +3,14 @@ make :
 	javac -sourcepath /home/ics/ARISS/ARISS/sources/UseCases/JNI_Template/javaCode/ TestJNI.java
 # copy .class in the right repository
 	cp TestJNI.class ../../../../binary/UseCases/JNI_Template/TestJNI.class
-	cp /libapexarinc653jni/ReturnObject.class ../../../../binary/UseCases/JNI_Template/ReturnObject.class
-	cp /libapexarinc653jni/LibApexArinc653Jni.class ../../../../binary/UseCases/JNI_Template/LibApexArinc653Jni.class
+# create the package directory
+	mkdir -p ../../../../binary/UseCases/JNI_Template/libapexarinc653jni/
+# copy the package .class
+	cp libapexarinc653jni/LibApexArinc653Jni.class ../../../../binary/UseCases/JNI_Template/libapexarinc653jni/LibApexArinc653Jni.class
+	cp libapexarinc653jni/ReturnObject.class ../../../../binary/UseCases/JNI_Template/libapexarinc653jni/ReturnObject.class
+
 #copy librairies
 	sudo cp ../../../../lib/libApexArinc653Jni.so /usr/lib/jvm/java-8-oracle/jre/bin/libApexArinc653Jni.so
-	sudo cp ../../../../lib/libApexArinc653.so /usr/lib/jvm/java-8-oracle/jre/bin/libApexArinc653.so
 
 
 #
