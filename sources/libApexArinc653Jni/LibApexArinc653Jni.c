@@ -17,29 +17,29 @@ JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_writeSamplingMessage
 }
 
 JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_readSamplingMessage
-  (JNIEnv *env, jobject obj, jint jSock, jstring jSender, jint jLength, jstring jMessage){
-    Type_Message *rMessage = (Type_Message*)malloc(sizeof(Type_Message));
+(JNIEnv *env, jobject obj, jint jSock, jstring jSender, jint jLength, jstring jMessage) {
+    Type_Message *rMessage = (Type_Message*) malloc(sizeof (Type_Message));
     int sock = jSock;
     int toReturn;
     toReturn = READ_SAMPLING_MESSAGE(sock, rMessage);
     printf("\n+++ SamplingSender = %s", rMessage->m_sender);
     fflush(stdout);
-    printf("\n+++ SamplingLength = %d",rMessage->m_length);
+    printf("\n+++ SamplingLength = %d", rMessage->m_length);
     fflush(stdout);
-    printf("\n+++ SamplingMessage = %s",rMessage->m_message);
+    printf("\n+++ SamplingMessage = %s", rMessage->m_message);
     fflush(stdout);
-/*
-    jclass cTypeMessage = env->FindClass("TypeMessage");
-    jmethodID setSender =  env->GetMethodID(cTypeMessage, "setSender", "(Ljava/lang/String;)V");
-    jmethodID setLength =  env->GetMethodID(cTypeMessage, "setLength", "(I)V");
-    jmethodID setMessage =  env->GetMethodID(cTypeMessage, "setMessage", "(Ljava/lang/String;)V");
-    jstring sender = env->NewStringUTF(rMessage->m_sender);
-    jint length = rMessage->m_length;
-    jstring msg = env->NewStringUTF(rMessage->m_message);
-    env->CallVoidMethod(jRMessage, setSender, sender);
-    env->CallVoidMethod(jRMessage, setLength, length);
-    env->CallVoidMethod(jRMessage, setMessage, msg);
-*/
+    /*
+        jclass cTypeMessage = env->FindClass("TypeMessage");
+        jmethodID setSender =  env->GetMethodID(cTypeMessage, "setSender", "(Ljava/lang/String;)V");
+        jmethodID setLength =  env->GetMethodID(cTypeMessage, "setLength", "(I)V");
+        jmethodID setMessage =  env->GetMethodID(cTypeMessage, "setMessage", "(Ljava/lang/String;)V");
+        jstring sender = env->NewStringUTF(rMessage->m_sender);
+        jint length = rMessage->m_length;
+        jstring msg = env->NewStringUTF(rMessage->m_message);
+        env->CallVoidMethod(jRMessage, setSender, sender);
+        env->CallVoidMethod(jRMessage, setLength, length);
+        env->CallVoidMethod(jRMessage, setMessage, msg);
+     */
     return toReturn;
 }
 
@@ -60,58 +60,62 @@ JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_sendQueuingMessage
 //int RECEIVE_QUEUING_MESSAGE(int sock, Type_Message *rMessage) 
 
 JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_receiveQueuingMessage
-  (JNIEnv *env, jobject obj, jint jSock, jstring jSender, jint jLength, jstring jMessage) {
-    Type_Message *rMessage = (Type_Message*)malloc(sizeof(Type_Message));
+(JNIEnv *env, jobject obj, jint jSock, jstring jSender, jint jLength, jstring jMessage) {
+    Type_Message *rMessage = (Type_Message*) malloc(sizeof (Type_Message));
     int sock = jSock;
+    printf("\n sock = %d\n", sock);
+
     int toReturn = 0;
     toReturn = RECEIVE_QUEUING_MESSAGE(sock, rMessage);
-    if (toReturn > 0){
+    printf("\nReturn code from C = %d\n", toReturn);
+    fflush(stdout);
+    if (toReturn > 0) {
         printf("\n+++ QueuingSender = %s", rMessage->m_sender);
         fflush(stdout);
-        printf("\n+++ QueuingLength = %d",rMessage->m_length);
+        printf("\n+++ QueuingLength = %d", rMessage->m_length);
         fflush(stdout);
-        printf("\n+++ QueuingMessage = %s",rMessage->m_message);
+        printf("\n+++ QueuingMessage = %s", rMessage->m_message);
         fflush(stdout);
     }
-    
-/*
-    // Getting TypeMessage class and methods
-    jclass cTypeMessage = env->FindClass("TypeMessage");
-    jmethodID setSender =  env->GetMethodID(cTypeMessage, "setSender", "(Ljava/lang/String;)V");
-    jmethodID setLength =  env->GetMethodID(cTypeMessage, "setLength", "(I)V");
-    jmethodID setMessage =  env->GetMethodID(cTypeMessage, "setMessage", "(Ljava/lang/String;)V");
-*/
-    
-    
 
-    
+    /*
+        // Getting TypeMessage class and methods
+        jclass cTypeMessage = env->FindClass("TypeMessage");
+        jmethodID setSender =  env->GetMethodID(cTypeMessage, "setSender", "(Ljava/lang/String;)V");
+        jmethodID setLength =  env->GetMethodID(cTypeMessage, "setLength", "(I)V");
+        jmethodID setMessage =  env->GetMethodID(cTypeMessage, "setMessage", "(Ljava/lang/String;)V");
+     */
+
+
+
+
     // Creating jobjects for filling jRMessage
-/*
-    const char *titi;
-    sprintf(rMessage->m_sender, titi);
-    jstring sender = env->NewStringUTF(titi);
-    jint length = 50;
-    jstring msg = env->NewStringUTF("blabla");
-*/
-    
-/*
-    jstring sender = env->NewStringUTF(rMessage->m_sender);
-    jint length = rMessage->m_length;
-    jstring msg = env->NewStringUTF(rMessage->m_message);
-*/
+    /*
+        const char *titi;
+        sprintf(rMessage->m_sender, titi);
+        jstring sender = env->NewStringUTF(titi);
+        jint length = 50;
+        jstring msg = env->NewStringUTF("blabla");
+     */
+
+    /*
+        jstring sender = env->NewStringUTF(rMessage->m_sender);
+        jint length = rMessage->m_length;
+        jstring msg = env->NewStringUTF(rMessage->m_message);
+     */
 
     // Sending objects to java
-/*
-    jSender = sender;
-    jLength = length;
-    jMessage = msg;
-*/
-/*
-    //Filling jRMessage
-    env->CallVoidMethod(jRMessage, setSender, sender);
-    env->CallVoidMethod(jRMessage, setLength, length);
-    env->CallVoidMethod(jRMessage, setMessage, msg);
-*/
+    /*
+        jSender = sender;
+        jLength = length;
+        jMessage = msg;
+     */
+    /*
+        //Filling jRMessage
+        env->CallVoidMethod(jRMessage, setSender, sender);
+        env->CallVoidMethod(jRMessage, setLength, length);
+        env->CallVoidMethod(jRMessage, setMessage, msg);
+     */
     return toReturn;
 }
 

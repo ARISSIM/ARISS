@@ -37,27 +37,21 @@ public class TestJNI {
         System.out.println("sock = " + sock);
         String emetteur = args[3];
         System.out.println("emetteur = " + emetteur);
+        String emetteurR = "", msgR = "";
+        int lengthR = 0;
         int i = 0;
-        for (i = 0; i < 10; i++) {
+        while(true){
             System.out.println("<<<< Sendind message n° " + i + ">>>>");
             String msg = "New message n° " + i;
             LibApexArinc653Jni.pSendQueuingMessage(name, port, sock, emetteur, msg);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(LibApexArinc653Jni.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        while(true){
-            String emetteurR = "", msgR = "";
-            int lengthR = 0, sockR = 0;
-            int ifMessage = LibApexArinc653Jni.pReceiveQueuingMessage(sockR, emetteurR, lengthR, msgR);
+            int ifMessage = LibApexArinc653Jni.pReceiveQueuingMessage(sock, emetteurR, lengthR, msgR);
             if (ifMessage > 0){
                 System.out.println("New queuing message");
             }else{
                 System.out.println("No new message");
             }
-            Thread.sleep(1);
+            Thread.sleep(1000);
+            i++;
         }
     }
 
