@@ -16,34 +16,32 @@ JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_writeSamplingMessage
     return toReturn;
 }
 
-JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_readSamplingMessage
-(JNIEnv *env, jobject obj, jint jSock, jstring jSender, jint jLength, jstring jMessage) {
+JNIEXPORT jobject JNICALL Java_LibApexArinc653Jni_readSamplingMessage
+(JNIEnv *env, jobject obj, jint jSock) {
     Type_Message *rMessage = (Type_Message*) malloc(sizeof (Type_Message));
     int sock = jSock;
-    int toReturn;
-    toReturn = READ_SAMPLING_MESSAGE(sock, rMessage);
-    printf("\n+++ SamplingSender = %s", rMessage->m_sender);
-    fflush(stdout);
-    printf("\n+++ SamplingLength = %d", rMessage->m_length);
-    fflush(stdout);
-    printf("\n+++ SamplingMessage = %s", rMessage->m_message);
-    fflush(stdout);
-    /*
-        jclass cTypeMessage = env->FindClass("TypeMessage");
-        jmethodID setSender =  env->GetMethodID(cTypeMessage, "setSender", "(Ljava/lang/String;)V");
-        jmethodID setLength =  env->GetMethodID(cTypeMessage, "setLength", "(I)V");
-        jmethodID setMessage =  env->GetMethodID(cTypeMessage, "setMessage", "(Ljava/lang/String;)V");
-        jstring sender = env->NewStringUTF(rMessage->m_sender);
-        jint length = rMessage->m_length;
-        jstring msg = env->NewStringUTF(rMessage->m_message);
-        env->CallVoidMethod(jRMessage, setSender, sender);
-        env->CallVoidMethod(jRMessage, setLength, length);
-        env->CallVoidMethod(jRMessage, setMessage, msg);
-     */
-    return toReturn;
+
+    // Récupération de la classe ReturnObject.java
+    jclass cReturnObject = env->FindClass("ReturnObject");
+    // Récupération du constructeur paramétré de la classe avec les paramètres (jint, jstring, jint, jstring)
+    jmethodID constructorReturnObject =  env->GetMethodID(cReturnObject, "<init>", "(ILjava/lang/String;ILjava/lang/String;)V");
+    
+    // Réception en C du message en queuing
+    int cToReturn = 0;
+    cToReturn = READ_SAMPLING_MESSAGE(sock, rMessage);
+    
+    // Création des jobjects pour les paramètres du constructeur de ReturnObject
+    jint jReturnCode = cToReturn;
+    jstring jSender = env->NewStringUTF(rMessage->m_sender);
+    jint jLength = rMessage->m_length;
+    jstring jMessage = env->NewStringUTF(rMessage->m_message);
+    
+    // Création de l'instance de ReturnObject pour renvoyer à l'application java
+    jobject jToReturn = env->NewObject(cReturnObject,constructorReturnObject, jReturnCode, jSender, jLength, jMessage);
+
+    return jToReturn;
 }
 
-//int SEND_QUEUING_MESSAGE(char *name, int portId, int sock, char *emetteur, char *message) 
 
 JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_sendQueuingMessage
 (JNIEnv *env, jobject obj, jstring jName, jint jPortId, jint jSock, jstring jEmetteur, jstring jMessage) {
@@ -57,67 +55,39 @@ JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_sendQueuingMessage
     return toReturn;
 }
 
-//int RECEIVE_QUEUING_MESSAGE(int sock, Type_Message *rMessage) 
 
-JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_receiveQueuingMessage
-(JNIEnv *env, jobject obj, jint jSock, jstring jSender, jint jLength, jstring jMessage) {
+
+JNIEXPORT jobject JNICALL Java_LibApexArinc653Jni_receiveQueuingMessage
+(JNIEnv *env, jobject obj, jint jSock) {
     Type_Message *rMessage = (Type_Message*) malloc(sizeof (Type_Message));
     int sock = jSock;
-    printf("\n sock = %d\n", sock);
 
-    int toReturn = 0;
-    toReturn = RECEIVE_QUEUING_MESSAGE(sock, rMessage);
-    printf("\nReturn code from C = %d\n", toReturn);
-    fflush(stdout);
-    if (toReturn > 0) {
-        printf("\n+++ QueuingSender = %s", rMessage->m_sender);
-        fflush(stdout);
-        printf("\n+++ QueuingLength = %d", rMessage->m_length);
-        fflush(stdout);
-        printf("\n+++ QueuingMessage = %s", rMessage->m_message);
-        fflush(stdout);
-    }
+    // Récupération de la classe ReturnObject.java
+    jclass cReturnObject = env->FindClass("ReturnObject");
+    // Récupération du constructeur paramétré de la classe avec les paramètres (jint, jstring, jint, jstring)
+    jmethodID constructorReturnObject =  env->GetMethodID(cReturnObject, "<init>", "(ILjava/lang/String;ILjava/lang/String;)V");
+    
+    // Réception en C du message en queuing
+    int cToReturn = 0;
+    cToReturn = RECEIVE_QUEUING_MESSAGE(sock, rMessage);
+    
+    // Création des jobjects pour les paramètres du constructeur de ReturnObject
+    jint jReturnCode = cToReturn;
+    jstring jSender = env->NewStringUTF(rMessage->m_sender);
+    jint jLength = rMessage->m_length;
+    jstring jMessage = env->NewStringUTF(rMessage->m_message);
+    
+    // Création de l'instance de ReturnObject pour renvoyer à l'application java
+    jobject jToReturn = env->NewObject(cReturnObject,constructorReturnObject, jReturnCode, jSender, jLength, jMessage);
 
-    /*
-        // Getting TypeMessage class and methods
-        jclass cTypeMessage = env->FindClass("TypeMessage");
-        jmethodID setSender =  env->GetMethodID(cTypeMessage, "setSender", "(Ljava/lang/String;)V");
-        jmethodID setLength =  env->GetMethodID(cTypeMessage, "setLength", "(I)V");
-        jmethodID setMessage =  env->GetMethodID(cTypeMessage, "setMessage", "(Ljava/lang/String;)V");
-     */
-
-
-
-
-    // Creating jobjects for filling jRMessage
-    /*
-        const char *titi;
-        sprintf(rMessage->m_sender, titi);
-        jstring sender = env->NewStringUTF(titi);
-        jint length = 50;
-        jstring msg = env->NewStringUTF("blabla");
-     */
-
-    /*
-        jstring sender = env->NewStringUTF(rMessage->m_sender);
-        jint length = rMessage->m_length;
-        jstring msg = env->NewStringUTF(rMessage->m_message);
-     */
-
-    // Sending objects to java
-    /*
-        jSender = sender;
-        jLength = length;
-        jMessage = msg;
-     */
-    /*
-        //Filling jRMessage
-        env->CallVoidMethod(jRMessage, setSender, sender);
-        env->CallVoidMethod(jRMessage, setLength, length);
-        env->CallVoidMethod(jRMessage, setMessage, msg);
-     */
-    return toReturn;
+    return jToReturn;
 }
+
+
+
+/*
+ *  Fonctions hors communication 
+ */
 
 /*
 JNIEXPORT jobject JNICALL Java_LibApexArinc653Jni_initCommunication

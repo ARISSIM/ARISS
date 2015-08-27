@@ -18,10 +18,10 @@ JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_writeSamplingMessage
 /*
  * Class:     LibApexArinc653Jni
  * Method:    readSamplingMessage
- * Signature: (ILjava/lang/String;ILjava/lang/String;)I
+ * Signature: (Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;)I
  */
-JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_readSamplingMessage
-  (JNIEnv *, jobject, jint, jstring, jint, jstring);
+JNIEXPORT jobject JNICALL Java_LibApexArinc653Jni_readSamplingMessage
+  (JNIEnv *, jobject, jint);
 
 /*
  * Class:     LibApexArinc653Jni
@@ -34,10 +34,10 @@ JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_sendQueuingMessage
 /*
  * Class:     LibApexArinc653Jni
  * Method:    receiveQueuingMessage
- * Signature: (ILjava/lang/String;ILjava/lang/String;)I
+ * Signature: (I)LReturnObject;
  */
-JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_receiveQueuingMessage
-  (JNIEnv *, jobject, jint, jstring, jint, jstring);
+JNIEXPORT jobject JNICALL Java_LibApexArinc653Jni_receiveQueuingMessage
+  (JNIEnv *, jobject, jint);
 
 #ifdef __cplusplus
 }

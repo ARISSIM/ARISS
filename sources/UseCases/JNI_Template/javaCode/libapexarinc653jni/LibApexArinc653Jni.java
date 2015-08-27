@@ -13,11 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.Vector;
+package libapexarinc653jni;
 
 /**
  *
@@ -31,13 +27,11 @@ public class LibApexArinc653Jni {
 
     //APEX ARINC 653 sampling communication
     private native int writeSamplingMessage(String jName, int jPortId, int jSock, String jEmetteur, String jMessage);
-    private native int readSamplingMessage(Integer jSock, String jSender, Integer jLength, String jMessage);
-//    private native int readSamplingMessage(int sock, TypeMessage rMessage);
+    private native ReturnObject readSamplingMessage(int jSock);
 
     //APEX ARINC 653 queuing communication
     private native int sendQueuingMessage(String jName, int jPortId, int jSock, String jEmetteur, String jMessage);
-    private native int receiveQueuingMessage(int jSock, String jSender, int jLength, String jMessage);
-//    private native int receiveQueuingMessage(int sock, TypeMessage rMessage);
+    private native ReturnObject receiveQueuingMessage(int jSock);
     
     //APEX ARINC 653 partition initialization
 //    private native CommunicationVector initCommunication(String arg, String mode);
@@ -48,8 +42,8 @@ public class LibApexArinc653Jni {
      * @param name
      * @param portId
      * @param sock
-     * @param message
      * @param sender
+     * @param message
      * @return
      */
     public static int pWriteSamplingMessage(String name, int portId, int sock, String sender, String message) {
@@ -61,12 +55,11 @@ public class LibApexArinc653Jni {
     /**
      *
      * @param sock
-     * @param rMessage
      * @return
      */
-    public static int pReadSamplingMessage(int jSock, String jSender, int jLength, String jMessage) {
+    public static ReturnObject pReadSamplingMessage(int jSock) {
         LibApexArinc653Jni lib = new LibApexArinc653Jni();
-        int toReturn = lib.readSamplingMessage(jSock, jSender, jLength, jMessage);
+        ReturnObject toReturn = lib.readSamplingMessage(jSock);
         return toReturn;
     }
 
@@ -75,8 +68,8 @@ public class LibApexArinc653Jni {
      * @param name
      * @param portId
      * @param sock
-     * @param message
      * @param sender
+     * @param message
      * @return
      */
     public static int pSendQueuingMessage(String name, int portId, int sock, String sender, String message) {
@@ -88,12 +81,11 @@ public class LibApexArinc653Jni {
     /**
      *
      * @param sock
-     * @param rMessage
      * @return
-     */
-    public static int pReceiveQueuingMessage(int jSock, String jSender, int jLength, String jMessage) {
+     */    
+    public static ReturnObject pReceiveQueuingMessage(int jSock) {
         LibApexArinc653Jni lib = new LibApexArinc653Jni();
-        int toReturn = lib.receiveQueuingMessage(jSock, jSender, jLength, jMessage);
+        ReturnObject toReturn = lib.receiveQueuingMessage(jSock);
         return toReturn;
     }
     
