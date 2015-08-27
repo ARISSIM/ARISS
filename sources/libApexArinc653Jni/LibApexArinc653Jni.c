@@ -65,6 +65,14 @@ JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_receiveQueuingMessage
     int sock = jSock;
     int toReturn = 0;
     toReturn = RECEIVE_QUEUING_MESSAGE(sock, rMessage);
+    if (toReturn > 0){
+        printf("\n+++ QueuingSender = %s", rMessage->m_sender);
+        fflush(stdout);
+        printf("\n+++ QueuingLength = %d",rMessage->m_length);
+        fflush(stdout);
+        printf("\n+++ QueuingMessage = %s",rMessage->m_message);
+        fflush(stdout);
+    }
     
 /*
     // Getting TypeMessage class and methods
@@ -74,20 +82,17 @@ JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_receiveQueuingMessage
     jmethodID setMessage =  env->GetMethodID(cTypeMessage, "setMessage", "(Ljava/lang/String;)V");
 */
     
-    printf("\n+++ QueuingSender = %s", rMessage->m_sender);
-    fflush(stdout);
-    printf("\n+++ QueuingLength = %d",rMessage->m_length);
-    fflush(stdout);
-    printf("\n+++ QueuingMessage = %s",rMessage->m_message);
-    fflush(stdout);
+    
 
     
     // Creating jobjects for filling jRMessage
+/*
     const char *titi;
     sprintf(rMessage->m_sender, titi);
     jstring sender = env->NewStringUTF(titi);
     jint length = 50;
     jstring msg = env->NewStringUTF("blabla");
+*/
     
 /*
     jstring sender = env->NewStringUTF(rMessage->m_sender);
@@ -96,9 +101,11 @@ JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_receiveQueuingMessage
 */
 
     // Sending objects to java
+/*
     jSender = sender;
     jLength = length;
     jMessage = msg;
+*/
 /*
     //Filling jRMessage
     env->CallVoidMethod(jRMessage, setSender, sender);

@@ -3,6 +3,8 @@
 *   1) compile TestJNI.java (command = javac TestJNI.java)
 *   2) copy TestJNI.class and LibApexArinc653Jni.class in binary/UsesCases/JNI_Template/
 *   3) copy libApexArinc653Jni.so in /usr/lib/jvm/java-8-oracle/jre/bin/
+*   4) Dans un terminal, se placer dans le useCase : ARISS/binary/UseCases/JNI_Template
+*   5) exporter la variable correspondant au chemin des librairies : commande "export LD_LIBRARY_PATH=/home/ics/ARISS/ARISS/lib"
 */
 
 
@@ -25,7 +27,7 @@ public class TestJNI {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         System.out.println("Init Partition 1");
         String name = args[0];
         System.out.println("name = " + name);
@@ -36,7 +38,7 @@ public class TestJNI {
         String emetteur = args[3];
         System.out.println("emetteur = " + emetteur);
         int i = 0;
-        for (i = 0; i < 20; i++) {
+        for (i = 0; i < 10; i++) {
             System.out.println("<<<< Sendind message n° " + i + ">>>>");
             String msg = "New message n° " + i;
             LibApexArinc653Jni.pSendQueuingMessage(name, port, sock, emetteur, msg);
@@ -45,6 +47,17 @@ public class TestJNI {
             } catch (InterruptedException ex) {
                 Logger.getLogger(LibApexArinc653Jni.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        while(true){
+            String emetteurR = "", msgR = "";
+            int lengthR = 0, sockR = 0;
+            int ifMessage = LibApexArinc653Jni.pReceiveQueuingMessage(sockR, emetteurR, lengthR, msgR);
+            if (ifMessage > 0){
+                System.out.println("New queuing message");
+            }else{
+                System.out.println("No new message");
+            }
+            Thread.sleep(1);
         }
     }
 
