@@ -19,7 +19,7 @@ package libapexarinc653jni;
  *
  * @author Camille Fayollas
  */
-public class ReturnObject{
+public final class ReturnObject{
     private int returnCode;
     private String sender;
     private int length;

@@ -1,6 +1,7 @@
 #include <jni.h>
 #include "CBasefunction.h"
-#include "LibApexArinc653Jni.h"
+//#include "LibApexArinc653Jni.h"
+#include "libapexarinc653jni_LibApexArinc653Jni.h"
 #include "CSampling.h"
 #include "CQueuing.h"
 

@@ -13,8 +13,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import libapexarinc653jni.LibApexArinc653Jni;
-import libapexarinc653jni.ReturnObject;
+import libapexarinc653jni.*;
 /**
  *
  * @author Camille Fayollas
