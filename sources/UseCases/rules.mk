@@ -15,7 +15,10 @@ d		:= $(dir)
 dir    := $(d)/BEI_AGILE
 include        $(dir)/rules.mk
 
-dir	:= $(d)/JNI_Template
+#dir	:= $(d)/JNI_Template
+#include	$(dir)/rules.mk
+
+dir	:= $(d)/JNI_Queuing
 include	$(dir)/rules.mk
 
 #dir	:= $(d)/multimachine
