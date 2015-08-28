@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
 //        
 //        std::cout << "java" <<  sClass.c_str()<<name.c_str()<<sPortID.c_str()<<sSock.c_str()<<emetteur.c_str()<< NULL <<std::endl;
 //        
-        int ret = execlp("java", "/usr/lib/jvm/java-8-oracle/bin/java","-XX:LoopUnrollLimit=1",sClass.c_str(),name.c_str(),sPortID.c_str(),sSock.c_str(),emetteur.c_str(), NULL);
+        int ret = execlp("java","/usr/lib/jvm/java-8-oracle/bin/java",sClass.c_str(),name.c_str(),sPortID.c_str(),sSock.c_str(),emetteur.c_str(), NULL);
         if (ret == -1)
             perror("Exec : ");
         
