@@ -5,7 +5,7 @@
 #include "CSampling.h"
 #include "CQueuing.h"
 
-JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_writeSamplingMessage
+JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_writeSamplingMessage
 (JNIEnv *env, jobject obj, jstring jName, jint jPortId, jint jSock, jstring jEmetteur, jstring jMessage) {
     char *name = strdup(env->GetStringUTFChars(jName, 0));
     int portId = jPortId;
@@ -17,13 +17,13 @@ JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_writeSamplingMessage
     return toReturn;
 }
 
-JNIEXPORT jobject JNICALL Java_LibApexArinc653Jni_readSamplingMessage
+JNIEXPORT jobject JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_readSamplingMessage
 (JNIEnv *env, jobject obj, jint jSock) {
     Type_Message *rMessage = (Type_Message*) malloc(sizeof (Type_Message));
     int sock = jSock;
 
     // Récupération de la classe ReturnObject.java
-    jclass cReturnObject = env->FindClass("ReturnObject");
+    jclass cReturnObject = env->FindClass("libapexarinc653jni/ReturnObject");
     // Récupération du constructeur paramétré de la classe avec les paramètres (jint, jstring, jint, jstring)
     jmethodID constructorReturnObject =  env->GetMethodID(cReturnObject, "<init>", "(ILjava/lang/String;ILjava/lang/String;)V");
     
@@ -44,7 +44,7 @@ JNIEXPORT jobject JNICALL Java_LibApexArinc653Jni_readSamplingMessage
 }
 
 
-JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_sendQueuingMessage
+JNIEXPORT jint JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_sendQueuingMessage
 (JNIEnv *env, jobject obj, jstring jName, jint jPortId, jint jSock, jstring jEmetteur, jstring jMessage) {
     char *name = strdup(env->GetStringUTFChars(jName, 0));
     int portId = jPortId;
@@ -58,13 +58,13 @@ JNIEXPORT jint JNICALL Java_LibApexArinc653Jni_sendQueuingMessage
 
 
 
-JNIEXPORT jobject JNICALL Java_LibApexArinc653Jni_receiveQueuingMessage
+JNIEXPORT jobject JNICALL Java_libapexarinc653jni_LibApexArinc653Jni_receiveQueuingMessage
 (JNIEnv *env, jobject obj, jint jSock) {
     Type_Message *rMessage = (Type_Message*) malloc(sizeof (Type_Message));
     int sock = jSock;
 
     // Récupération de la classe ReturnObject.java
-    jclass cReturnObject = env->FindClass("ReturnObject");
+    jclass cReturnObject = env->FindClass("libapexarinc653jni/ReturnObject");
     // Récupération du constructeur paramétré de la classe avec les paramètres (jint, jstring, jint, jstring)
     jmethodID constructorReturnObject =  env->GetMethodID(cReturnObject, "<init>", "(ILjava/lang/String;ILjava/lang/String;)V");
     
