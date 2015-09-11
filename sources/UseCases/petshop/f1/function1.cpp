@@ -59,11 +59,12 @@ int main(int argc, char *argv[]) {
     argument[5] = "/home/ics/.petshop/dev";
     argument[6] = "--branding";
     argument[7] = "petshop";
-    argument[8] = "-J-Xms512m";
-    argument[9] = "-J-Xmx1g";
-    argument[10] = "-J-Dapexname="+petshopArg;
+    argument[8] = "-J-XX:LoopUnrollLimit=1";
+    argument[9] = "-J-Xms512m";
+    argument[10] = "-J-Xmx1g";
+    argument[11] = "-J-Dapexname="+petshopArg;
 
-    ret = execlp("/home/ics/NetBeansProjects/modules/suites/petshop/petshop.application/target/petshop/platform/lib/nbexec", (argument[0]).c_str(), (argument[1]).c_str(), (argument[2]).c_str(), (argument[3]).c_str(), (argument[4]).c_str(), (argument[5]).c_str(), (argument[6]).c_str(), (argument[7]).c_str(), (argument[8]).c_str(), (argument[9]).c_str(), (argument[10]).c_str(), NULL);
+    ret = execlp("/home/ics/NetBeansProjects/modules/suites/petshop/petshop.application/target/petshop/platform/lib/nbexec", (argument[0]).c_str(), (argument[1]).c_str(), (argument[2]).c_str(), (argument[3]).c_str(), (argument[4]).c_str(), (argument[5]).c_str(), (argument[6]).c_str(), (argument[7]).c_str(), (argument[8]).c_str(), (argument[9]).c_str(), (argument[10]).c_str(),(argument[11]).c_str(), NULL);
     if (ret == -1)
         perror("Exec : ");
 }
