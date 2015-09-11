@@ -18,7 +18,8 @@ import libapexarinc653jni.*;
  *
  * @author Camille Fayollas
  */
-public class TestJNI {
+public class TestJNIQueuing
+{
 
     /**
      * @param args the command line arguments
