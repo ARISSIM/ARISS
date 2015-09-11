@@ -24,10 +24,10 @@ int main(int argc, char *argv[])
         std::string name = argv[0];
         int portID;
         int sock;
-        vector_get(&(myCvector.vqueuing_port), 0, &portID);
-        std::cout << "QueingPort : " << portID << std::endl;
-        vector_get(&(myCvector.vqueuing_socket), 0, &sock);
-        std::cout << "Queuing socket : " << sock << std::endl;
+        vector_get(&(myCvector.vsamp_port), 0, &portID);
+        std::cout << "Sampling port : " << portID << std::endl;
+        vector_get(&(myCvector.vsamp_socket), 0, &sock);
+        std::cout << "Sampling socket : " << sock << std::endl;
         std::string emetteur = myCvector.emetteur;
         
 //        std::string argument[20];
@@ -46,11 +46,11 @@ int main(int argc, char *argv[])
 //        std::string commande = "java TestJNI " + name + " " + convertInt(portID) + " " + convertInt(sock) + " " + emetteur;
         std::string sPortID = convertInt(portID);
         std::string sSock = convertInt(sock);
-        std::string sClass = "TestJNI";
+        std::string sClass = "TestJNISampling";
 //        
 //        std::cout << "java" <<  sClass.c_str()<<name.c_str()<<sPortID.c_str()<<sSock.c_str()<<emetteur.c_str()<< NULL <<std::endl;
 //        
-        int ret = execlp("java", "/usr/lib/jvm/java-8-oracle/bin/java","-XX:LoopUnrollLimit=1",sClass.c_str(),name.c_str(),sPortID.c_str(),sSock.c_str(),emetteur.c_str(), NULL);
+        int ret = execlp("java","/usr/lib/jvm/java-8-oracle/bin/java",sClass.c_str(),name.c_str(),sPortID.c_str(),sSock.c_str(),emetteur.c_str(), NULL);
         if (ret == -1)
             perror("Exec : ");
         

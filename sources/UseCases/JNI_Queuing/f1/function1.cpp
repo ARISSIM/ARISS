@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 //        std::string commande = "java TestJNI " + name + " " + convertInt(portID) + " " + convertInt(sock) + " " + emetteur;
         std::string sPortID = convertInt(portID);
         std::string sSock = convertInt(sock);
-        std::string sClass = "TestJNI";
+        std::string sClass = "TestJNIQueuing";
 //        
 //        std::cout << "java" <<  sClass.c_str()<<name.c_str()<<sPortID.c_str()<<sSock.c_str()<<emetteur.c_str()<< NULL <<std::endl;
 //        

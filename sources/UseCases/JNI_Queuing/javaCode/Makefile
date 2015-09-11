@@ -1,6 +1,6 @@
 make :
 # compile java application
-	javac -d ../../../../binary/UseCases/JNI_Queuing/ TestJNI.java 
+	javac -sourcepath /home/ics/ARISS/ARISS/sources/UseCases/JNI_Queuing/javaCode/ -d ../../../../binary/UseCases/JNI_Queuing/ TestJNIQueuing.java 
 # copy .class in the right repository
 #	cp TestJNI.class ../../../../binary/UseCases/JNI_Queuing/TestJNI.class
 # create the package directory

@@ -18,23 +18,23 @@ int main(int argc, char *argv[]) {
     Type_Message rMessage;
     int portID;
     int sock;
-    vector_get(&(myCvector.vqueuing_port), 0, &portID);
-    std::cout << "QueingPort : " << portID << std::endl;
-    vector_get(&(myCvector.vqueuing_socket), 0, &sock);
-    std::cout << "Queuing socket : " << sock << std::endl;
+    vector_get(&(myCvector.vsamp_port), 0, &portID);
+    std::cout << "SamplingPort : " << portID << std::endl;
+    vector_get(&(myCvector.vsamp_socket), 0, &sock);
+    std::cout << "Sampling socket : " << sock << std::endl;
     //    CQueuing Qservice;
 
     int ifmessage = 0;
     int cptMessage = 0;
     for (ifmessage=0; ifmessage < 10 ; ifmessage++){
             char sMessage[256];
-            std::cout << "Sending queuing message numero " << ifmessage << std::endl;
+            std::cout << "Sending sampling message numero " << ifmessage << std::endl;
             sprintf(sMessage, "Message envoye depuis f2 numero %d", ifmessage);
-            SEND_QUEUING_MESSAGE(argv[0], portID, sock, myCvector.emetteur, sMessage);
+            WRITE_SAMPLING_MESSAGE(argv[0], portID, sock, myCvector.emetteur, sMessage);
     }
     for (;;) {
        // std::cout << "debur boucle for, vqueuing_socket[0] : " << sock << std::endl;
-        ifmessage = RECEIVE_QUEUING_MESSAGE(sock, &rMessage);
+        ifmessage = READ_SAMPLING_MESSAGE(sock, &rMessage);
         if (ifmessage > 0) {
             //            Qservice.Display_Message();
             std::cout << "			" << std::endl;
@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
             std::cout << "receive :" << rMessage.m_message << std::endl;
             std::cout << "			" << std::endl;
         }else{
-            std::cout << "No new queuing message" << std::endl;
+            std::cout << "No new sampling message" << std::endl;
         }
         sleep(1);
 

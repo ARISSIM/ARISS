@@ -13,12 +13,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+import libapexarinc653jni.*;
 /**
  *
  * @author Camille Fayollas
  */
-public class TestJNI {
+public class TestJNISampling {
 
     /**
      * @param args the command line arguments
@@ -39,8 +39,8 @@ public class TestJNI {
         while(true){
             System.out.println("<<<< Sendind message n° " + i + ">>>>");
             String msg = "New message n° " + i;
-            LibApexArinc653Jni.pSendQueuingMessage(name, port, sock, emetteur, msg);
-            ReturnObject rMsg = LibApexArinc653Jni.pReceiveQueuingMessage(sock);
+            LibApexArinc653Jni.pWriteSamplingMessage(name, port, sock, emetteur, msg);
+            ReturnObject rMsg = LibApexArinc653Jni.pReadSamplingMessage(sock);
             
             if (rMsg.getReturnCode()>0){
                 System.out.println("--------------------------");
