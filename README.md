@@ -10,3 +10,5 @@ You can find the source code of the ARINC 653 simulator at https://github.com/AR
 This project was initially developed at LAAS-CNRS ( https://www.laas.fr/public/en/tsf) under the supervision of Prof. Jean-Charles Fabre (INPT-ENSEEIHT) as a tool for education and research. The first version was developed by Gabriel BUSTAMENTE, Rémi PALUSTRAN and Martin CRONEL, former students of INPT-ENSEEIHT dept GEA. The current version has been developed and is maintained by Martin CRONEL.
 
 You can find details on the software architecture and on its use in the ReadMe directory.
+
+website at http://arissim.github.io/ARISS/
