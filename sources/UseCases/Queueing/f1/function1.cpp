@@ -9,7 +9,7 @@
 int main(int argc, char *argv[]) {
     int redemarrage = atoi(argv[7]);
     int position = atoi(argv[6]);
-    GUI_ARINC_partition("Partition1", position, redemarrage);
+	GUI_ARINC_partition("Partition1", position, redemarrage);
     std::cout << "GUI OK" << std::endl;
     Type_Message rMessage;
     int nbarg = argc;
@@ -33,13 +33,28 @@ int main(int argc, char *argv[]) {
     vector_get(&(myCvector.vqueuing_port), 0, &portID);
     vector_get(&(myCvector.vqueuing_socket), 0, &sock);
 
+    sleep(2);
+
+    char sMessage[256];
+    sprintf(sMessage, "P1 INIT_DONE");
+    SEND_QUEUING_MESSAGE(argv[0], portID, sock, myCvector.emetteur, sMessage, 256);
+
+    int msgID = 0;
+    int msgNum = 0;
+
     for (;;) {
-        char sMessage[256];
-        sprintf(sMessage, "Message envoye depuis f1 numero %d", j);
-        std::cout << "			" << std::endl;
-        std::cout << ">>> Sending message: " << sMessage << std::endl;
-        SEND_QUEUING_MESSAGE(argv[0], portID, sock, myCvector.emetteur, sMessage);
-        j++;
+
+
+
+    	memcpy(sMessage, &msgID, 4);
+    	memcpy(sMessage+4, &msgNum, 4);
+		SEND_QUEUING_MESSAGE(argv[0], portID, sock, myCvector.emetteur, sMessage, 256);
+
+        std::cout << ">>> Sending message: " << msgNum << std::endl;
+
+		msgNum++;
+
+
 
         ifmsg = RECEIVE_QUEUING_MESSAGE(sock, &rMessage);
         if (ifmsg > 0) {
@@ -47,7 +62,7 @@ int main(int argc, char *argv[]) {
             std::cout << "<<< Receiving message from: " << rMessage.m_sender << " - Length: " << rMessage.m_length << std::endl;
             std::cout << "<<< Message: " << rMessage.m_message << std::endl;
         } else {
-            std::cout << "<<< No new message" << std::endl;
+            //std::cout << "<<< No new message" << std::endl;
         }
 
         sleep(1);

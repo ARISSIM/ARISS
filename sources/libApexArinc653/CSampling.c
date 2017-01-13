@@ -8,11 +8,18 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int WRITE_SAMPLING_MESSAGE(char *name, int portId, int sock, char *emetteur, char *message) {
+int WRITE_SAMPLING_MESSAGE(char *name, int portId, int sock, char *emetteur, char *message, int msgLen) {
     const char *str1 = message; //convert char to const char    
     Type_Message myMessage;
-    strcpy(myMessage.m_message, str1);
-    myMessage.m_length = sizeof (myMessage.m_message);
+
+    if (msgLen > MSG_LENGTH || msgLen <= 0)
+    {
+        perror("message length error");
+        return -1;
+    }
+    memcpy(myMessage.m_message, str1, msgLen);
+    myMessage.m_length = msgLen;
+
     const char *str2 = emetteur;
     strcpy(myMessage.m_sender, str2);
 

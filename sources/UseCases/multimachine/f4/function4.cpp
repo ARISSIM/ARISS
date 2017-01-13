@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
     for (;;) {
         i++;
         sprintf(result, "marthym f4 : sampling message numero %d", i);
-        Sservice.WRITE_SAMPLING_MESSAGE(machine_name, myCvector.vsamp_port[0], myCvector.vsamp_socket[0], myCvector.emetteur, result);
+        Sservice.WRITE_SAMPLING_MESSAGE(machine_name, myCvector.vsamp_port[0], myCvector.vsamp_socket[0], myCvector.emetteur, result, strlen(result));
 
         Sservice.READ_SAMPLING_MESSAGE(myCvector.vsamp_socket[0]);
         Sservice.Display_Message();

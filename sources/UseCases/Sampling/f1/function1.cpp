@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
         sprintf(sMessage, "message envoye depuis Part1 numero %d", i);
         std::cout << "			" << std::endl;
         std::cout << ">>> Sending message: " << sMessage << std::endl;
-        ret = WRITE_SAMPLING_MESSAGE(name_machine, samp_port, samp_socket, myCvector.emetteur, sMessage);
+        ret = WRITE_SAMPLING_MESSAGE(name_machine, samp_port, samp_socket, myCvector.emetteur, sMessage, strlen(sMessage));
 
         if (ret == -1) {
             perror("WRITE_SAMPLING_MESSAGE : ");

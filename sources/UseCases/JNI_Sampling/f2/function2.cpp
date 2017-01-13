@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
             char sMessage[256];
             std::cout << "Sending sampling message numero " << ifmessage << std::endl;
             sprintf(sMessage, "Message envoye depuis f2 numero %d", ifmessage);
-            WRITE_SAMPLING_MESSAGE(argv[0], portID, sock, myCvector.emetteur, sMessage);
+            WRITE_SAMPLING_MESSAGE(argv[0], portID, sock, myCvector.emetteur, sMessage, strlen(sMessage));
     }
     for (;;) {
        // std::cout << "debur boucle for, vqueuing_socket[0] : " << sock << std::endl;

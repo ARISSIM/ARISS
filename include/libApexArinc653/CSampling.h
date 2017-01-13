@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include "CCommunication.h"
 
-int WRITE_SAMPLING_MESSAGE(char *name, int portId, int sock, char *emetteur, char *message);
+int WRITE_SAMPLING_MESSAGE(char *name, int portId, int sock, char *emetteur, char *message, int msgLen);
 int READ_SAMPLING_MESSAGE(int sock, Type_Message *rMessage);
 
 #endif

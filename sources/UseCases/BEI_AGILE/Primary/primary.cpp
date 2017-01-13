@@ -38,14 +38,14 @@ int main(int argc, char *argv[]) {
         sprintf(sMessage, "QMessage envoye depuis Primary numero %d", j);
         std::cout << "			" << std::endl;
         std::cout << ">>> Sending message: " << sMessage << std::endl;
-        SEND_QUEUING_MESSAGE(name_machine, portIDQ1, sockQ1, myCvector.emetteur, sMessage);
+        SEND_QUEUING_MESSAGE(name_machine, portIDQ1, sockQ1, myCvector.emetteur, sMessage, strlen(sMessage));
         j++;
         std::cout << "Queuing message sent: " << sMessage << std::endl;
 
         sprintf(sMessage, "SMessage from primary #%d", j);
         std::cout << "			" << std::endl;
         std::cout << ">>> Sending message: " << sMessage << std::endl;
-        ret = WRITE_SAMPLING_MESSAGE(name_machine, portIDS0, sockS0, myCvector.emetteur, sMessage);
+        ret = WRITE_SAMPLING_MESSAGE(name_machine, portIDS0, sockS0, myCvector.emetteur, sMessage, strlen(sMessage));
         if (ret == -1) {
             perror("WRITE_SAMPLING_MESSAGE : ");
         }
