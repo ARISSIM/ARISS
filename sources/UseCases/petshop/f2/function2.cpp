@@ -60,8 +60,8 @@ int main(int argc, char *argv[]) {
         sprintf(sMessage, "Message sent from Partition2 number: %d", j);
         std::cout << "			" << std::endl;
         std::cout << ">>> Sending message: " << sMessage << std::endl;
-        SEND_QUEUING_MESSAGE(name, queuingPortID, queuingSock, emetteur, rMessage.m_message);
-        WRITE_SAMPLING_MESSAGE(name, samplingPortID, samplingSock, emetteur, rMessage.m_message);
+        SEND_QUEUING_MESSAGE(name, queuingPortID, queuingSock, emetteur, rMessage.m_message, rMessage.m_length);
+        WRITE_SAMPLING_MESSAGE(name, samplingPortID, samplingSock, emetteur, rMessage.m_message, rMessage.m_length);
         j++;
         
         sleep(4);

@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
         std::cout << "			" << std::endl;
         std::cout << ">>> Sending message: " << sMessage << std::endl;
 
-        WRITE_SAMPLING_MESSAGE(name_machine, samp_port, samp_socket, myCvector.emetteur, sMessage);
+        WRITE_SAMPLING_MESSAGE(name_machine, samp_port, samp_socket, myCvector.emetteur, sMessage, strlen(sMessage));
 
         ret = READ_SAMPLING_MESSAGE(samp_socket, rMessage);
 

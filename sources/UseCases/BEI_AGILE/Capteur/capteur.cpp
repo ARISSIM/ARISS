@@ -43,13 +43,13 @@ int main(int argc, char *argv[]) {
         sprintf(sMessage, "message capteur numero %d", j); // message à evoyer
         std::cout << "			" << std::endl;
         std::cout << ">>> Sending message: " << sMessage << std::endl;
-        SEND_QUEUING_MESSAGE(name_machine, portID0, sock0, myCvector.emetteur, sMessage);
+        SEND_QUEUING_MESSAGE(name_machine, portID0, sock0, myCvector.emetteur, sMessage, strlen(sMessage));
         j++;
 
         sprintf(sMessage, "message capteur numero %d", j); // message à evoyer
         std::cout << "			" << std::endl;
         std::cout << ">>> Sending message: " << sMessage << std::endl;
-        SEND_QUEUING_MESSAGE(name_machine, portID1, sock1, myCvector.emetteur, sMessage);
+        SEND_QUEUING_MESSAGE(name_machine, portID1, sock1, myCvector.emetteur, sMessage, strlen(sMessage));
         j++;
 
 
